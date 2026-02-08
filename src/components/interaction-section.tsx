@@ -18,8 +18,9 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
   const sadGif = PlaceHolderImages.find(img => img.id === 'gif_sad_character');
 
   const handleNoHover = () => {
-    // Make "No" button harder to catch, with smaller movement on mobile
-    const moveScale = typeof window !== 'undefined' && window.innerWidth < 768 ? 100 : 250;
+    // Make "No" button harder to catch, but keep it on screen.
+    // Reduced moveScale to be less extreme, especially on mobile.
+    const moveScale = typeof window !== 'undefined' && window.innerWidth < 768 ? 80 : 150;
     const newX = (Math.random() - 0.5) * moveScale * 2;
     const newY = (Math.random() - 0.5) * moveScale;
     setNoPosition({ x: newX, y: newY });
@@ -33,7 +34,8 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
 
   return (
     <section className="w-full">
-      <div className="container mx-auto flex h-64 flex-col sm:h-48 sm:flex-row items-center justify-center gap-8 relative">
+      {/* Increased height to give the "No" button more room to move vertically */}
+      <div className="container mx-auto flex h-80 flex-col items-center justify-center gap-8 sm:h-64 sm:flex-row">
         <Button
           onClick={onYesClick}
           onMouseEnter={() => setIsYesHovered(true)}
@@ -43,10 +45,16 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
         >
           YES 💜
         </Button>
+        
+        {/* This div wraps the "No" button and its pop-up message. It is part of the flex layout. */}
         <div
-          className="relative h-24 w-48"
+          className="relative" // Relative positioning for the "hehe" message
           onMouseEnter={handleNoHover}
           onTouchStart={handleNoHover}
+          style={{
+            transform: `translate(${noPosition.x}px, ${noPosition.y}px)`,
+            transition: 'transform 0.3s ease-out',
+          }}
         >
            {noTries > 0 && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center pointer-events-none transition-opacity duration-300">
@@ -55,13 +63,6 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
             </div>
           )}
           <Button
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: `translate(-50%, -50%) translate(${noPosition.x}px, ${noPosition.y}px)`,
-              transition: 'transform 0.2s ease-out',
-            }}
             className="px-10 py-6 text-2xl font-bold text-white bg-transparent border-2 rounded-full border-gray-400 hover:border-white"
           >
             NO 💔
