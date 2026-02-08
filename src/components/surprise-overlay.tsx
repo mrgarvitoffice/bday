@@ -22,6 +22,11 @@ export function SurpriseOverlay() {
   const excitedGif = PlaceHolderImages.find(img => img.id === 'gif_excited_character');
   const loveGif1 = PlaceHolderImages.find(img => img.id === 'gif_love_1');
   const loveGif2 = PlaceHolderImages.find(img => img.id === 'gif_love_2');
+  const loveGif3 = PlaceHolderImages.find(img => img.id === 'gif_love_3');
+  const loveGif4 = PlaceHolderImages.find(img => img.id === 'gif_love_4');
+  const loveGif5 = PlaceHolderImages.find(img => img.id === 'gif_love_5');
+  const loveGif6 = PlaceHolderImages.find(img => img.id === 'gif_love_6');
+
 
   useEffect(() => {
     setIsMounted(true);
@@ -66,10 +71,14 @@ export function SurpriseOverlay() {
       </div>
       {showContent && (
         <div className="z-10 flex flex-col items-center gap-8 px-4 text-center animate-in fade-in-0 slide-in-from-bottom-10 duration-1000">
-           <div className="flex items-center justify-center gap-4">
+           <div className="flex flex-wrap items-center justify-center gap-4">
                {loveGif1 && <Image src={loveGif1.imageUrl} alt={loveGif1.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '200ms'}} />}
                {excitedGif && <Image src={excitedGif.imageUrl} alt={excitedGif.description} unoptimized width={150} height={150} className="rounded-lg animate-bounce-in" />}
                {loveGif2 && <Image src={loveGif2.imageUrl} alt={loveGif2.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '400ms'}} />}
+               {loveGif3 && <Image src={loveGif3.imageUrl} alt={loveGif3.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '600ms'}} />}
+               {loveGif4 && <Image src={loveGif4.imageUrl} alt={loveGif4.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '800ms'}} />}
+               {loveGif5 && <Image src={loveGif5.imageUrl} alt={loveGif5.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '1000ms'}} />}
+               {loveGif6 && <Image src={loveGif6.imageUrl} alt={loveGif6.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '1200ms'}} />}
            </div>
            <h2 className="text-4xl md:text-5xl font-headline text-white text-glow">
             Our Valentine date is officially booked 💜❤️
