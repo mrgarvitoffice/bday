@@ -99,7 +99,7 @@ export function SurpriseOverlay() {
                     </motion.div>
                 ))}
                 </motion.div>
-                <h2 className="text-4xl md:text-5xl font-headline text-foreground" style={{ textShadow: '0 0 10px hsl(var(--accent)), 0 0 20px hsl(var(--primary))' }}>
+                <h2 className="text-4xl md:text-5xl font-headline text-foreground text-glow">
                     Our Valentine date is officially booked 💜❤️
                 </h2>
             </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -21,31 +21,44 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
 
   const handleNoInteraction = () => {
     if (!noButtonRef.current || !containerRef.current) return;
-
+  
     const containerRect = containerRef.current.getBoundingClientRect();
     const buttonRect = noButtonRef.current.getBoundingClientRect();
-
+  
+    // Ensure the button stays within the container's bounds
     const maxX = containerRect.width - buttonRect.width;
     const maxY = containerRect.height - buttonRect.height;
     
-    const newX = Math.random() * maxX;
-    const newY = Math.random() * maxY;
+    // Add some padding from the edges
+    const padding = 20;
 
-    setNoPosition({ x: newX, y: newY });
-    setYesScale(scale => Math.min(scale + 1, 10));
+    let newX = Math.random() * (maxX - padding * 2) + padding;
+    let newY = Math.random() * (maxY - padding * 2) + padding;
+
+    // Ensure the new position is not too close to the current position to avoid getting stuck
+    const currentX = noPosition.x + buttonRect.width / 2;
+    const currentY = noPosition.y + buttonRect.height / 2;
+
+    while (Math.abs(newX - currentX) < buttonRect.width * 2 && Math.abs(newY - currentY) < buttonRect.height * 2) {
+      newX = Math.random() * (maxX - padding * 2) + padding;
+      newY = Math.random() * (maxY - padding * 2) + padding;
+    }
+  
+    setNoPosition({ x: newX - buttonRect.width/2, y: newY - buttonRect.height/2 });
+    setYesScale(scale => Math.min(scale + 0.2, 5));
     setNoTries(tries => tries + 1);
   };
   
   return (
     <section ref={containerRef} className="w-full h-96 relative flex items-center justify-center p-4 overflow-hidden">
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center justify-center gap-8 md:gap-12">
             <motion.button
               onClick={onYesClick}
               animate={{ scale: yesScale }}
-              whileHover={{ scale: yesScale * 1.1 }}
+              whileHover={{ scale: yesScale * 1.1, transition: { type: 'spring', stiffness: 300 } }}
               whileTap={{ scale: yesScale * 0.95 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="z-20 px-10 py-6 text-2xl font-bold rounded-full origin-center"
+              transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+              className="z-20 px-8 py-5 md:px-10 md:py-6 text-xl md:text-2xl font-bold rounded-full origin-center text-white"
               style={{
                 background: 'linear-gradient(to right, hsl(var(--secondary)), hsl(var(--primary)))',
                 boxShadow: '0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--accent) / 0.5)'
@@ -56,9 +69,12 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
             
             <motion.div
               className="absolute"
+              ref={noButtonRef}
               animate={noTries > 0 ? { x: noPosition.x, y: noPosition.y } : {}}
               style={noTries === 0 ? { position: 'relative' } : {}}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              onHoverStart={handleNoInteraction}
+              onClick={handleNoInteraction}
             >
               <AnimatePresence>
                 {noTries > 0 && (
@@ -74,11 +90,8 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
                 )}
               </AnimatePresence>
               <motion.button
-                ref={noButtonRef}
-                onHoverStart={handleNoInteraction}
-                onClick={handleNoInteraction}
                 className={cn(
-                  "px-10 py-6 text-2xl font-bold rounded-full border-2 bg-transparent",
+                  "px-8 py-5 md:px-10 md:py-6 text-xl md:text-2xl font-bold rounded-full border-2 bg-transparent",
                   noTries > 0 ? "border-muted-foreground/50 text-muted-foreground/70" : "border-foreground/50 text-foreground"
                 )}
               >
