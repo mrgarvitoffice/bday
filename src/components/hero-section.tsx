@@ -100,7 +100,7 @@ export function HeroSection() {
         >
             {title.map((char, index) => (
                 <motion.span key={index} variants={charVariants}>
-                    {char === ' ' ? '\u00A0' : char}
+                    {char}
                 </motion.span>
             ))}
         </motion.h1>
