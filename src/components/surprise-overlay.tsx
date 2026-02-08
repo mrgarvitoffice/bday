@@ -2,9 +2,17 @@
 
 import { useEffect, useState, useMemo } from 'react';
 
-const Particle = ({ style, className }: { style: React.CSSProperties; className: string }) => (
-  <div style={style} className={`absolute rounded-full ${className}`} />
-);
+const HeartIcon = ({ style, className }: { style?: React.CSSProperties, className?: string }) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      style={style}
+    >
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+    </svg>
+  );
 
 export function SurpriseOverlay() {
   const [showText, setShowText] = useState(false);
@@ -18,17 +26,20 @@ export function SurpriseOverlay() {
 
   const particles = useMemo(() => {
     if (!isMounted) return [];
-    return Array.from({ length: 100 }).map((_, i) => ({
-      id: i,
-      style: {
-        left: `${Math.random() * 100}%`,
-        animation: `fall ${Math.random() * 5 + 5}s linear ${Math.random() * 5}s infinite`,
-        width: `${Math.random() * 8 + 4}px`,
-        height: `${Math.random() * 8 + 4}px`,
-        opacity: Math.random() * 0.5 + 0.5,
-      },
-      className: Math.random() > 0.3 ? 'bg-primary' : Math.random() > 0.5 ? 'bg-accent' : 'bg-rose-300',
-    }));
+    return Array.from({ length: 150 }).map((_, i) => {
+        const size = Math.random() * 2.5 + 1; // 1rem to 3.5rem
+        return {
+            id: i,
+            style: {
+              left: `${Math.random() * 100}%`,
+              animation: `fall ${Math.random() * 8 + 5}s linear ${Math.random() * 10}s infinite`,
+              width: `${size}rem`,
+              height: `${size}rem`,
+              opacity: Math.random() * 0.7 + 0.3,
+            },
+            className: `absolute ${Math.random() > 0.3 ? 'text-primary' : Math.random() > 0.5 ? 'text-accent' : 'text-rose-300'}`,
+        }
+    });
   }, [isMounted]);
 
   if (!isMounted) {
@@ -38,7 +49,7 @@ export function SurpriseOverlay() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 animate-in fade-in-50">
       <div className="absolute inset-0 overflow-hidden">
-        {particles.map(p => <Particle key={p.id} {...p} />)}
+        {particles.map(({id, style, className}) => <HeartIcon key={id} style={style} className={className} />)}
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <div 
