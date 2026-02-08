@@ -45,17 +45,20 @@ const subtitleVariants = {
 
 const HeartIcon = () => (
     <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 0.5 }}
+        initial={{ opacity: 0, filter: 'drop-shadow(0 0 0px hsl(var(--primary)))' }}
+        animate={{ opacity: 1, filter: 'drop-shadow(0 0 10px hsl(var(--primary)))' }}
+        transition={{ duration: 2, delay: 0.5, filter: { delay: 3.5, duration: 1} }}
     >
         <motion.svg
             width="100"
             height="100"
             viewBox="0 0 100 100"
             initial={{ scale: 0.5 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 2, type: 'spring', stiffness: 100, damping: 10 }}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ 
+                scale: { delay: 4.5, duration: 2, repeat: Infinity, repeatType: 'mirror' },
+                default: { delay: 2, type: 'spring', stiffness: 100, damping: 10 }
+            }}
         >
             <motion.path
                 d="M50 87.2C25.5 69.2 12.5 56.2 12.5 40C12.5 27.3 22.3 17.5 35 17.5C42.4 17.5 49.3 21.4 50 27.5C50.7 21.4 57.6 17.5 65 17.5C77.7 17.5 87.5 27.3 87.5 40C87.5 56.2 74.5 69.2 50 87.2Z"

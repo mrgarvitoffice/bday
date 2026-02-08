@@ -29,19 +29,17 @@ const loveGifs = [
 ].map(id => PlaceHolderImages.find(img => img.id === id)).filter(Boolean);
 
 const romanticMessages = [
-    "ACCHA SOLLY",
-    "U will lobb it",
-    "Lobb uhh kajuuuu",
-    "Tu musse pyar ni krti 😭",
-    "Matt kro rahem madam",
-    "Kidhar thi madam",
-    "Hemlo",
-    "Fuk me malkin",
-    "Jo hukum malkin i am ur prsnl gulam ahh..",
-    "Ruko madam",
-    "Aur tekko godi me uthakr bister tak lauga",
-    "Ready ho darling baby",
-    "Fu harder than last time means try",
+    "You said yes!",
+    "I knew you couldn't resist.",
+    "Our adventure awaits...",
+    "Get ready for the best date ever.",
+    "Just you and me.",
+    "My heart is all yours.",
+    "Can't wait to see you.",
+    "I'm counting down the seconds.",
+    "You + Me = ❤️",
+    "Prepare to be pampered.",
+    "This is our story.",
 ];
 
 const containerVariants = {
@@ -151,7 +149,7 @@ export function SurpriseOverlay() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.5, ease: 'easeOut' }}
             >
-                Our Valentine date is officially booked 💜❤️
+                Our Valentine date is officially booked ❤️
             </motion.h2>
 
             <motion.div 

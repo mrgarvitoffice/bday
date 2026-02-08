@@ -53,17 +53,26 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
         <div className="flex items-center justify-center gap-8 md:gap-12">
             <motion.button
               onClick={onYesClick}
-              animate={{ scale: yesScale }}
+              animate={{ 
+                  scale: yesScale,
+                  boxShadow: [
+                    '0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--accent) / 0.5)',
+                    '0 0 15px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--accent) / 0.7)',
+                    '0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--accent) / 0.5)',
+                  ]
+              }}
               whileHover={{ scale: yesScale * 1.1, transition: { type: 'spring', stiffness: 300 } }}
               whileTap={{ scale: yesScale * 0.95 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+              transition={{
+                  scale: { type: 'spring', stiffness: 300, damping: 10 },
+                  boxShadow: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+              }}
               className="z-20 px-8 py-5 md:px-10 md:py-6 text-xl md:text-2xl font-bold rounded-full origin-center text-white"
               style={{
                 background: 'linear-gradient(to right, hsl(var(--secondary)), hsl(var(--primary)))',
-                boxShadow: '0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--accent) / 0.5)'
               }}
             >
-              YES 💜
+              YES ❤️
             </motion.button>
             
             <motion.div

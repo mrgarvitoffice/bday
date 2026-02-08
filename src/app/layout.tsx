@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Eternal Valentine',
-  description: 'A luxury romantic Valentine website.',
+  title: 'A Luxury Valentine Experience',
+  description: 'A special valentine surprise.',
 };
 
 export default function RootLayout({
