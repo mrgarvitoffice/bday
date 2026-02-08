@@ -23,16 +23,25 @@ const loveGifs = [
     'gif_love_3', 
     'gif_love_4', 
     'gif_love_5', 
-    'gif_love_6'
+    'gif_love_6',
+    'gif_love_7',
+    'gif_love_8'
 ].map(id => PlaceHolderImages.find(img => img.id === id)).filter(Boolean);
 
 const romanticMessages = [
-    "So, our date is booked...",
-    "You're not getting away this time 😉",
-    "I have a few more surprises for you.",
-    "Just thinking about it gives me butterflies.",
-    "Prepare to be pampered.",
-    "I love you more than words can say.",
+    "ACCHA SOLLY",
+    "U will lobb it",
+    "Lobb uhh kajuuuu",
+    "Tu musse pyar ni krti 😭",
+    "Matt kro rahem madam",
+    "Kidhar thi madam",
+    "Hemlo",
+    "Fuk me malkin",
+    "Jo hukum malkin i am ur prsnl gulam ahh..",
+    "Ruko madam",
+    "Aur tekko godi me uthakr bister tak lauga",
+    "Ready ho darling baby",
+    "Fu harder than last time means try",
 ];
 
 const containerVariants = {
@@ -125,14 +134,14 @@ export function SurpriseOverlay() {
             className="z-10 flex flex-col items-center gap-8 text-center"
         >
             <motion.div 
-                className="flex flex-wrap items-center justify-center gap-2 md:gap-4"
+                className="grid grid-cols-3 gap-2 md:gap-4"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
             >
             {loveGifs.map((gif, i) => gif && (
                 <motion.div key={i} variants={itemVariants} className="glassmorphism p-2">
-                    <video src={gif.imageUrl} autoPlay loop muted playsInline width={100} height={100} className="rounded-lg" />
+                    <video src={gif.imageUrl} autoPlay loop muted playsInline width={100} height={100} className="rounded-lg object-cover aspect-square" />
                 </motion.div>
             ))}
             </motion.div>
@@ -146,7 +155,7 @@ export function SurpriseOverlay() {
             </motion.h2>
 
             <motion.div 
-                className="flex flex-col gap-2 mt-4"
+                className="flex flex-col gap-2 mt-4 h-24 relative w-full"
                 variants={messageContainerVariants}
                 initial="hidden"
                 animate="visible"
@@ -154,8 +163,10 @@ export function SurpriseOverlay() {
                 {romanticMessages.map((msg, i) => (
                     <motion.p 
                         key={i} 
-                        className="text-xl md:text-2xl font-handwritten text-accent"
-                        variants={messageItemVariants}
+                        className="text-xl md:text-2xl font-handwritten text-accent absolute left-1/2 -translate-x-1/2"
+                        initial={{ opacity: 0, y: 20, rotate: Math.random() * 20 - 10 }}
+                        animate={{ opacity: 1, y: 0, transition: { duration: 0.4, delay: i * 0.3 } }}
+                        exit={{ opacity: 0 }}
                     >
                         {msg}
                     </motion.p>
@@ -168,7 +179,7 @@ export function SurpriseOverlay() {
                 initial="hidden"
                 animate="visible"
             >
-                So... about that open car ride... Wanna make it an all-day adventure? 😉
+                Wanna do that open car babe on Valentine for 1 hour ??
             </motion.h3>
         </div>
     </motion.div>
