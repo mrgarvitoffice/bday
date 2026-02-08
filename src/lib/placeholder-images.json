@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "valentine_1",
+      "description": "A couple holding hands at sunset.",
+      "imageUrl": "https://images.unsplash.com/photo-1542460533-50ac46fb13d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb3VwbGUlMjBzdW5zZXR8ZW58MHx8fHwxNzcwNTI0MjgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "couple sunset"
+    },
+    {
+      "id": "valentine_2",
+      "description": "A romantic dinner setup with candles.",
+      "imageUrl": "https://images.unsplash.com/photo-1611765083444-a3ce30f1c885?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxyb21hbnRpYyUyMGRpbm5lcnxlbnwwfHx8fDE3NzA0OTQ1NDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "romantic dinner"
+    },
+    {
+      "id": "valentine_3",
+      "description": "Two glasses of wine with a scenic view.",
+      "imageUrl": "https://images.unsplash.com/photo-1636300827940-544c65f1931f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3aW5lJTIwcm9tYW50aWN8ZW58MHx8fHwxNzcwNTYzMzQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "wine romantic"
+    },
+    {
+      "id": "valentine_4",
+      "description": "A path covered in rose petals.",
+      "imageUrl": "https://images.unsplash.com/photo-1571506534699-c76894c03ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyb3NlJTIwcGV0YWxzfGVufDB8fHx8MTc3MDU2MzM0OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "rose petals"
+    }
+  ]
 }
