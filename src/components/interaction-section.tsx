@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef } from 'react';
-import { Button } from '@/components/ui/button';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { cn } from '@/lib/utils';
 
 type InteractionSectionProps = {
   onYesClick: () => void;
@@ -12,91 +13,78 @@ type InteractionSectionProps = {
 export function InteractionSection({ onYesClick }: InteractionSectionProps) {
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const [yesScale, setYesScale] = useState(1);
-  const [isYesHovered, setIsYesHovered] = useState(false);
   const [noTries, setNoTries] = useState(0);
-  const noButtonWrapperRef = useRef<HTMLDivElement>(null);
+  const noButtonRef = useRef<HTMLButtonElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const sadGif = PlaceHolderImages.find(img => img.id === 'gif_sad_character');
 
-  const handleNoHover = () => {
-    const wrapper = noButtonWrapperRef.current;
-    if (!wrapper) return;
+  const handleNoInteraction = () => {
+    if (!noButtonRef.current || !containerRef.current) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const buttonRect = noButtonRef.current.getBoundingClientRect();
+
+    const maxX = containerRect.width - buttonRect.width;
+    const maxY = containerRect.height - buttonRect.height;
     
-    const container = wrapper.parentElement;
-    if (!container) return;
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
 
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-
-    const currentX = noPosition.x;
-    const currentY = noPosition.y;
-
-    const naturalLeft = wrapperRect.left - currentX - containerRect.left;
-    const naturalTop = wrapperRect.top - currentY - containerRect.top;
-
-    const moveRange = 250; 
-
-    let newX = (Math.random() - 0.5) * moveRange;
-    let newY = (Math.random() - 0.5) * moveRange;
-
-    // Constrain X
-    if (naturalLeft + newX < 0) {
-      newX = -naturalLeft;
-    } else if (naturalLeft + newX + wrapperRect.width > containerRect.width) {
-      newX = containerRect.width - wrapperRect.width - naturalLeft;
-    }
-
-    // Constrain Y
-    if (naturalTop + newY < 0) {
-      newY = -naturalTop;
-    } else if (naturalTop + newY + wrapperRect.height > containerRect.height) {
-      newY = containerRect.height - wrapperRect.height - naturalTop;
-    }
-    
     setNoPosition({ x: newX, y: newY });
-    
-    setYesScale(scale => Math.min(scale + 0.35, 5));
+    setYesScale(scale => Math.min(scale + 0.3, 5));
     setNoTries(tries => tries + 1);
   };
   
-  const yesButtonScale = isYesHovered ? yesScale * 1.1 : yesScale;
-
   return (
-    <section className="w-full overflow-hidden">
-      <div className="container mx-auto flex h-80 flex-col items-center justify-center gap-8 sm:h-64 sm:flex-row relative px-4">
-        <Button
-          onClick={onYesClick}
-          onMouseEnter={() => setIsYesHovered(true)}
-          onMouseLeave={() => setIsYesHovered(false)}
-          style={{ transform: `scale(${yesButtonScale})` }}
-          className="z-10 px-10 py-6 text-2xl font-bold text-white origin-center transition-all duration-300 ease-in-out border-2 rounded-full shadow-lg bg-primary/80 border-primary animate-subtle-pulse hover:bg-primary neon-glow"
-        >
-          YES 💜
-        </Button>
-        
-        <div
-          ref={noButtonWrapperRef}
-          className="relative"
-          onMouseEnter={handleNoHover}
-          onTouchStart={(e) => { e.preventDefault(); handleNoHover(); }}
-          style={{
-            transform: `translate(${noPosition.x}px, ${noPosition.y}px)`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        >
-           {noTries > 0 && (
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center pointer-events-none transition-opacity duration-300">
-                {noTries > 1 && sadGif && <Image src={sadGif.imageUrl} width={50} height={50} alt="sad gif" unoptimized />}
-                <p className="text-sm text-rose-200 whitespace-nowrap animate-bounce-in">hehe not allowed 😝</p>
-            </div>
-          )}
-          <Button
-            className="px-10 py-6 text-2xl font-bold text-white bg-transparent border-2 rounded-full border-gray-400 hover:border-white"
-          >
-            NO 💔
-          </Button>
+    <section ref={containerRef} className="w-full h-96 relative flex items-center justify-center p-4 overflow-hidden">
+        <div className="flex items-center justify-center gap-8 flex-col sm:flex-row">
+            <motion.button
+              onClick={onYesClick}
+              animate={{ scale: yesScale }}
+              whileHover={{ scale: yesScale * 1.1 }}
+              whileTap={{ scale: yesScale * 0.95 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+              className="z-20 px-10 py-6 text-2xl font-bold text-white origin-center rounded-full shadow-lg"
+              style={{
+                background: 'linear-gradient(to right, hsl(var(--secondary)), hsl(var(--primary)))',
+                boxShadow: '0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--accent) / 0.5)'
+              }}
+            >
+              YES 💜
+            </motion.button>
+            
+            <motion.div
+              className="absolute sm:relative"
+              animate={{ x: noPosition.x, y: noPosition.y }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            >
+              <AnimatePresence>
+                {noTries > 0 && (
+                  <motion.div 
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center pointer-events-none"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                  >
+                      {noTries > 1 && sadGif && <Image src={sadGif.imageUrl} width={50} height={50} alt="sad gif" unoptimized />}
+                      <p className="text-sm text-rose-200 whitespace-nowrap">hehe not allowed 😝</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <motion.button
+                ref={noButtonRef}
+                onHoverStart={handleNoInteraction}
+                onClick={handleNoInteraction}
+                className={cn(
+                  "px-10 py-6 text-2xl font-bold rounded-full border-2 bg-transparent",
+                  noTries > 0 ? "border-muted-foreground/50 text-muted-foreground/70" : "border-foreground/50 text-foreground"
+                )}
+              >
+                NO 💔
+              </motion.button>
+            </motion.div>
         </div>
-      </div>
     </section>
   );
 }

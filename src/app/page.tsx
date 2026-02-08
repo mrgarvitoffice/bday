@@ -4,33 +4,26 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { HeroSection } from '@/components/hero-section';
 import { InteractionSection } from '@/components/interaction-section';
-import { LoveLetterSection } from '@/components/love-letter-section';
 import { MemoriesSection } from '@/components/memories-section';
 import { ShareSection } from '@/components/share-section';
 import { SurpriseOverlay } from '@/components/surprise-overlay';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const [showDateFlow, setShowDateFlow] = useState(false);
   const [showFinale, setShowFinale] = useState(false);
-  const [isPageFadingOut, setIsPageFadingOut] = useState(false);
   const footerHeart = PlaceHolderImages.find(img => img.id === 'gif_footer_heart');
 
   const handleYesClick = () => {
-    setIsPageFadingOut(true);
-    // After a short fade, start the date flow
-    setTimeout(() => {
-      setShowDateFlow(true);
-    }, 1000); 
+    setShowDateFlow(true);
   };
   
   const handleDateFlowComplete = () => {
     setShowDateFlow(false);
-    // isPageFadingOut is already true, so this will trigger the finale
     setShowFinale(true);
   }
 
-  // Prevent scrolling when surprise is active
   useEffect(() => {
     if (showFinale || showDateFlow) {
       document.body.style.overflow = 'hidden';
@@ -41,35 +34,39 @@ export default function Home() {
       document.body.style.overflow = 'auto';
     };
   }, [showFinale, showDateFlow]);
-  
-  if (showFinale) {
-    return <SurpriseOverlay />;
-  }
-  
-  if (showDateFlow) {
-    return <MemoriesSection onComplete={handleDateFlowComplete} />;
-  }
 
   return (
-    <div className={`transition-opacity duration-1000 ${isPageFadingOut ? 'opacity-0' : 'opacity-100'}`}>
-      <HeroSection />
-      <div className="space-y-16 py-16 md:space-y-24 md:py-24">
-        <LoveLetterSection />
-        <InteractionSection onYesClick={handleYesClick} />
-        <ShareSection />
+    <main className="flex flex-col items-center min-h-screen overflow-x-hidden">
+      <div className="w-full max-w-[1100px] mx-auto px-4">
+        <AnimatePresence>
+          {!showDateFlow && !showFinale && (
+            <>
+              <HeroSection />
+              <InteractionSection onYesClick={handleYesClick} />
+              <div className="py-16 md:py-24">
+                <ShareSection />
+              </div>
+              <footer className="py-8 text-center text-white/50 flex flex-col items-center justify-center gap-4">
+                <p>Crafted with love for my valentine.</p>
+                {footerHeart && (
+                  <Image
+                    src={footerHeart.imageUrl}
+                    alt={footerHeart.description}
+                    width={50}
+                    height={50}
+                    unoptimized
+                  />
+                )}
+              </footer>
+            </>
+          )}
+        </AnimatePresence>
       </div>
-      <footer className="py-8 text-center text-white/50 flex flex-col items-center justify-center gap-4">
-        <p>Crafted with love for my valentine.</p>
-        {footerHeart && (
-          <Image
-            src={footerHeart.imageUrl}
-            alt={footerHeart.description}
-            width={50}
-            height={50}
-            unoptimized
-          />
-        )}
-      </footer>
-    </div>
+
+      <AnimatePresence>
+        {showDateFlow && <MemoriesSection onComplete={handleDateFlowComplete} />}
+        {showFinale && <SurpriseOverlay />}
+      </AnimatePresence>
+    </main>
   );
 }

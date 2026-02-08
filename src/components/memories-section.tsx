@@ -3,36 +3,51 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { cn } from '@/lib/utils';
-import { Share2, Star, Waves } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const dateSteps = [
     { text: "We start the day with smiles… and you.", gifId: "gif_morning_hug" },
-    { text: "A cozy coffee, a warm talk.", gifId: "gif_coffee_together", icon: <Waves /> },
-    { text: "An aesthetic drive, just us and the music.", gifId: "gif_car_ride", icon: <Star /> },
+    { text: "A cozy coffee, a warm talk.", gifId: "gif_coffee_together" },
+    { text: "An aesthetic drive, just us and the music.", gifId: "gif_car_ride" },
     { text: "Watching the sunset, painting our memories.", gifId: "gif_sunset_couple" },
     { text: "One date… many memories 💜", gifId: "gif_cuddly_couple" },
 ];
 
-const DateStep = ({ text, gifId, isActive }: { text: string, gifId: string, isActive: boolean }) => {
+const cardVariants = {
+    initial: { opacity: 0, y: 20, scale: 0.95 },
+    enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+    exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] } },
+};
+
+const DateStep = ({ text, gifId }: { text: string, gifId: string }) => {
     const gif = PlaceHolderImages.find(img => img.id === gifId);
     return (
-        <div className={cn(
-            "absolute inset-0 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-1000",
-            isActive ? "opacity-100" : "opacity-0"
-        )}>
-            {gif && (
-                <Image 
-                    src={gif.imageUrl}
-                    alt={text}
-                    width={300}
-                    height={300}
-                    unoptimized
-                    className="rounded-2xl shadow-2xl shadow-primary/20"
-                />
-            )}
-            <p className="mt-8 text-2xl font-headline text-white text-glow max-w-sm">{text}</p>
-        </div>
+        <motion.div
+            key={text}
+            variants={cardVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+            className="absolute inset-0 flex items-center justify-center"
+        >
+            <div className="glassmorphism w-[90vw] max-w-sm p-4 md:p-6 text-center flex flex-col items-center gap-4">
+                {gif && (
+                    <div className="relative w-full aspect-square max-w-[300px]">
+                        <Image 
+                            src={gif.imageUrl}
+                            alt={text}
+                            fill
+                            unoptimized
+                            style={{ objectFit: 'cover' }}
+                            className="rounded-2xl"
+                        />
+                    </div>
+                )}
+                <p className="mt-4 text-xl font-handwritten text-foreground max-w-xs" style={{ textShadow: '0 1px 4px hsl(var(--primary) / 0.5)'}}>
+                    {text}
+                </p>
+            </div>
+        </motion.div>
     );
 };
 
@@ -40,34 +55,37 @@ export function MemoriesSection({ onComplete }: { onComplete: () => void }) {
     const [step, setStep] = useState(0);
 
     useEffect(() => {
-        if (step < dateSteps.length -1) {
+        const stepDuration = 3500;
+        if (step < dateSteps.length) {
             const timer = setTimeout(() => {
                 setStep(s => s + 1);
-            }, 3000); // 3 seconds per step
+            }, stepDuration);
             return () => clearTimeout(timer);
         } else {
              const finalTimer = setTimeout(() => {
                 onComplete();
-            }, 3000);
+            }, stepDuration);
             return () => clearTimeout(finalTimer);
         }
     }, [step, onComplete]);
 
     return (
-        <section className="fixed inset-0 z-40 bg-background flex items-center justify-center animate-in fade-in duration-1000">
-            <div className="relative w-full h-full max-w-md max-h-screen">
-                {dateSteps.map((dateStep, index) => (
+        <motion.section 
+            className="fixed inset-0 z-40 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            <AnimatePresence mode="wait">
+                {step < dateSteps.length && (
                     <DateStep 
-                        key={index}
-                        text={dateStep.text}
-                        gifId={dateStep.gifId}
-                        isActive={step === index}
+                        key={step}
+                        text={dateSteps[step].text}
+                        gifId={dateSteps[step].gifId}
                     />
-                ))}
-                {/* Background decorations */}
-                <Star className="absolute top-1/4 left-4 text-accent/50 animate-pulse" />
-                <Waves className="absolute bottom-1/4 right-4 text-accent/50 animate-pulse animation-delay-500" />
-            </div>
-        </section>
+                )}
+            </AnimatePresence>
+        </motion.section>
     );
 }
