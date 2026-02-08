@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -14,43 +14,71 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
   const [yesScale, setYesScale] = useState(1);
   const [isYesHovered, setIsYesHovered] = useState(false);
   const [noTries, setNoTries] = useState(0);
+  const noButtonWrapperRef = useRef<HTMLDivElement>(null);
 
   const sadGif = PlaceHolderImages.find(img => img.id === 'gif_sad_character');
 
   const handleNoHover = () => {
-    // Make "No" button harder to catch, but keep it on screen.
-    // Reduced moveScale to be less extreme, especially on mobile.
-    const moveScale = typeof window !== 'undefined' && window.innerWidth < 768 ? 80 : 150;
-    const newX = (Math.random() - 0.5) * moveScale * 2;
-    const newY = (Math.random() - 0.5) * moveScale;
-    setNoPosition({ x: newX, y: newY });
+    const wrapper = noButtonWrapperRef.current;
+    if (!wrapper) return;
+    
+    const container = wrapper.parentElement;
+    if (!container) return;
 
-    // Make "Yes" button bigger, capped at 5x size
-    setYesScale(scale => Math.min(scale + 0.25, 5));
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+
+    const currentX = noPosition.x;
+    const currentY = noPosition.y;
+
+    const naturalLeft = wrapperRect.left - currentX - containerRect.left;
+    const naturalTop = wrapperRect.top - currentY - containerRect.top;
+
+    const moveRange = 250; 
+
+    let newX = (Math.random() - 0.5) * moveRange;
+    let newY = (Math.random() - 0.5) * moveRange;
+
+    // Constrain X
+    if (naturalLeft + newX < 0) {
+      newX = -naturalLeft;
+    } else if (naturalLeft + newX + wrapperRect.width > containerRect.width) {
+      newX = containerRect.width - wrapperRect.width - naturalLeft;
+    }
+
+    // Constrain Y
+    if (naturalTop + newY < 0) {
+      newY = -naturalTop;
+    } else if (naturalTop + newY + wrapperRect.height > containerRect.height) {
+      newY = containerRect.height - wrapperRect.height - naturalTop;
+    }
+    
+    setNoPosition({ x: newX, y: newY });
+    
+    setYesScale(scale => Math.min(scale + 0.35, 5));
     setNoTries(tries => tries + 1);
   };
   
   const yesButtonScale = isYesHovered ? yesScale * 1.1 : yesScale;
 
   return (
-    <section className="w-full">
-      {/* Increased height to give the "No" button more room to move vertically */}
-      <div className="container mx-auto flex h-80 flex-col items-center justify-center gap-8 sm:h-64 sm:flex-row">
+    <section className="w-full overflow-hidden">
+      <div className="container mx-auto flex h-80 flex-col items-center justify-center gap-8 sm:h-64 sm:flex-row relative px-4">
         <Button
           onClick={onYesClick}
           onMouseEnter={() => setIsYesHovered(true)}
           onMouseLeave={() => setIsYesHovered(false)}
           style={{ transform: `scale(${yesButtonScale})` }}
-          className="px-10 py-6 text-2xl font-bold text-white origin-center transition-all duration-300 ease-in-out border-2 rounded-full shadow-lg bg-primary/80 border-primary animate-subtle-pulse hover:bg-primary neon-glow"
+          className="z-10 px-10 py-6 text-2xl font-bold text-white origin-center transition-all duration-300 ease-in-out border-2 rounded-full shadow-lg bg-primary/80 border-primary animate-subtle-pulse hover:bg-primary neon-glow"
         >
           YES 💜
         </Button>
         
-        {/* This div wraps the "No" button and its pop-up message. It is part of the flex layout. */}
         <div
-          className="relative" // Relative positioning for the "hehe" message
+          ref={noButtonWrapperRef}
+          className="relative"
           onMouseEnter={handleNoHover}
-          onTouchStart={handleNoHover}
+          onTouchStart={(e) => { e.preventDefault(); handleNoHover(); }}
           style={{
             transform: `translate(${noPosition.x}px, ${noPosition.y}px)`,
             transition: 'transform 0.3s ease-out',
