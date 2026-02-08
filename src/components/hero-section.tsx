@@ -93,7 +93,7 @@ export function HeroSection() {
         <HeartIcon />
         
         <motion.h1
-            className="text-5xl sm:text-7xl lg:text-8xl font-headline text-foreground mt-8 text-glow"
+            className="text-5xl sm:text-6xl md:text-7xl font-headline text-foreground mt-8 text-glow"
             variants={containerVariants}
             initial="hidden"
             animate="visible"

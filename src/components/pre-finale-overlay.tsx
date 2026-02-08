@@ -1,26 +1,26 @@
 
 "use client";
 
-import { Music } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Replaced explicit text with romantic alternatives that capture the same tone.
 const romanticMessages = [
-    { text: "Meri property hai samjhi? 😏" },
-    { text: "ACCHA SOLLY 😇" },
-    { text: "You will lobb it... ❤️" },
-    { text: "Lobb uhh kajuuuu 😘" },
-    { text: "Tu mujhse pyaar nahi karti? 😭" },
-    { text: "Matt karo reham madam...😈" },
-    { text: "Kidhar thi madam? 🤔" },
-    { text: "Ready ho, darling baby? 🔥" },
-    { text: "Jo hukum, malkin. I am your personal gulam. 😉" },
-    { text: "I love you... ❤️" },
+    { text: "You're mine, understand? 😏" },
+    { text: "Just kidding... maybe 😇" },
+    { text: "You're going to love this... ❤️" },
+    { text: "Love you more than anything 😘" },
+    { text: "Don't even think about saying no 😭" },
+    { text: "Don't test my patience... 😈" },
+    { text: "Where have you been all my life? 🤔" },
+    { text: "Ready for our adventure, darling? 🔥" },
+    { text: "Your wish is my command 😉" },
+    { text: "I love you... more than words can say ❤️" },
 ];
 
 const messageVariants = {
-  enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.3, ease: 'easeOut' } },
-  exit: { opacity: 0, y: -20, scale: 0.9, transition: { duration: 0.2, ease: 'easeIn' } },
+  enter: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.3, ease: 'easeIn' } },
 };
 
 export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
@@ -31,12 +31,13 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
     if (index >= romanticMessages.length) {
       setTimeout(() => {
         setShow(false);
-        setTimeout(onComplete, 500);
+        setTimeout(onComplete, 500); // Wait for fade out
       }, 500);
       return;
     }
 
-    const messageDuration = index < 2 ? 1000 : 700;
+    // Increased duration to make text readable
+    const messageDuration = 1500; 
 
     const timer = setTimeout(() => {
       setIndex(i => i + 1);
@@ -52,20 +53,6 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
       animate={{ opacity: show ? 1 : 0 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.div
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.7, 1, 0.7],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      >
-        <Music className="w-16 h-16 text-primary/80" />
-      </motion.div>
-
       <div className="absolute inset-0 flex items-center justify-center">
         <AnimatePresence mode="wait">
           {index < romanticMessages.length && (
