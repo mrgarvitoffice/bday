@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -5,11 +6,10 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const dateSteps = [
-    { text: "We start the day with smiles… and you.", gifId: "gif_morning_hug" },
-    { text: "A cozy coffee, a warm talk.", gifId: "gif_coffee_together" },
-    { text: "An aesthetic drive, just us and the music.", gifId: "gif_car_ride" },
-    { text: "Watching the sunset, painting our memories.", gifId: "gif_sunset_couple" },
-    { text: "One date… many memories 💜", gifId: "gif_cuddly_couple" },
+    { text: "We'll start the day with a long drive, just us and the road...", gifId: "gif_car_ride" },
+    { text: "Find a perfect spot to watch the sun go down.", gifId: "gif_sunset_couple" },
+    { text: "And end the night with a promise...", gifId: "gif_cuddly_couple" },
+    { text: "Just say yes... and our story begins.", gifId: "gif_morning_hug" },
 ];
 
 const cardVariants = {
@@ -58,7 +58,7 @@ export function MemoriesSection({ onComplete }: { onComplete: () => void }) {
     const [step, setStep] = useState(0);
 
     useEffect(() => {
-        const stepDuration = 3500;
+        const stepDuration = 3000;
         if (step < dateSteps.length) {
             const timer = setTimeout(() => {
                 setStep(s => s + 1);
@@ -67,7 +67,7 @@ export function MemoriesSection({ onComplete }: { onComplete: () => void }) {
         } else {
              const finalTimer = setTimeout(() => {
                 onComplete();
-            }, stepDuration);
+            }, stepDuration - 1000);
             return () => clearTimeout(finalTimer);
         }
     }, [step, onComplete]);
@@ -80,6 +80,7 @@ export function MemoriesSection({ onComplete }: { onComplete: () => void }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
         >
+             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
             <AnimatePresence mode="wait">
                 {step < dateSteps.length && (
                     <DateStep 

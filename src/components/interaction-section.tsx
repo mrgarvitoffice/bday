@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
@@ -13,7 +14,7 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 });
   const [yesScale, setYesScale] = useState(1);
   const [noTries, setNoTries] = useState(0);
-  const noButtonRef = useRef<HTMLButtonElement>(null);
+  const noButtonRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const sadGif = PlaceHolderImages.find(img => img.id === 'gif_sad_character');
@@ -23,27 +24,11 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
   
     const containerRect = containerRef.current.getBoundingClientRect();
     const buttonRect = noButtonRef.current.getBoundingClientRect();
-  
-    // Ensure the button stays within the container's bounds
-    const maxX = containerRect.width - buttonRect.width;
-    const maxY = containerRect.height - buttonRect.height;
     
-    // Add some padding from the edges
-    const padding = 20;
-
-    let newX = Math.random() * (maxX - padding * 2) + padding;
-    let newY = Math.random() * (maxY - padding * 2) + padding;
-
-    // Ensure the new position is not too close to the current position to avoid getting stuck
-    const currentX = noPosition.x + buttonRect.width / 2;
-    const currentY = noPosition.y + buttonRect.height / 2;
-
-    while (Math.abs(newX - currentX) < buttonRect.width * 2 && Math.abs(newY - currentY) < buttonRect.height * 2) {
-      newX = Math.random() * (maxX - padding * 2) + padding;
-      newY = Math.random() * (maxY - padding * 2) + padding;
-    }
+    const newX = Math.random() * (containerRect.width - buttonRect.width);
+    const newY = Math.random() * (containerRect.height - buttonRect.height);
   
-    setNoPosition({ x: newX - buttonRect.width/2, y: newY - buttonRect.height/2 });
+    setNoPosition({ x: newX, y: newY });
     setYesScale(scale => Math.min(scale + 0.2, 5));
     setNoTries(tries => tries + 1);
   };
@@ -78,11 +63,11 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
             <motion.div
               className="absolute"
               ref={noButtonRef}
-              animate={noTries > 0 ? { x: noPosition.x, y: noPosition.y } : {}}
-              style={noTries === 0 ? { position: 'relative' } : {}}
+              animate={noTries > 0 ? { x: noPosition.x, y: noPosition.y, top: 0, left: 0 } : {}}
+              style={noTries === 0 ? { position: 'relative' } : { position: 'absolute' }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              onHoverStart={handleNoInteraction}
-              onClick={handleNoInteraction}
+              onMouseEnter={handleNoInteraction}
+              onTouchStart={handleNoInteraction}
             >
               <AnimatePresence>
                 {noTries > 0 && (
@@ -93,18 +78,19 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
                     exit={{ opacity: 0, y: 10 }}
                   >
                       {noTries > 1 && sadGif && <video src={sadGif.imageUrl} width={50} height={50} autoPlay loop muted playsInline />}
-                      <p className="text-sm text-muted-foreground whitespace-nowrap">hehe not allowed 😝</p>
+                      <p className="text-sm text-muted-foreground whitespace-nowrap">Not an option 😝</p>
                   </motion.div>
                 )}
               </AnimatePresence>
-              <motion.button
+              <button
+                onClick={handleNoInteraction}
                 className={cn(
                   "px-8 py-5 md:px-10 md:py-6 text-xl md:text-2xl font-bold rounded-full border-2 bg-transparent",
                   noTries > 0 ? "border-muted-foreground/50 text-muted-foreground/70" : "border-foreground/50 text-foreground"
                 )}
               >
                 NO 💔
-              </motion.button>
+              </button>
             </motion.div>
         </div>
     </section>

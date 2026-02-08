@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from 'framer-motion';
@@ -111,7 +112,7 @@ export function HeroSection() {
             animate="visible"
         >
             <p className="text-xl md:text-2xl text-muted-foreground font-handwritten" style={{textShadow: '0 1px 5px hsl(var(--accent) / 0.5)'}}>
-                Wanna do that open car babe on Valentine..
+                I've got a surprise for you... if you say yes.
             </p>
              {blushingHeart && (
                 <video 
@@ -125,7 +126,6 @@ export function HeroSection() {
                     className="inline-block"
                 />
             )}
-             ❤️
         </motion.div>
     </header>
   );

@@ -1,9 +1,11 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
 import { HeroSection } from '@/components/hero-section';
 import { InteractionSection } from '@/components/interaction-section';
 import { MemoriesSection } from '@/components/memories-section';
+import { PreFinaleOverlay } from '@/components/pre-finale-overlay';
 import { ShareSection } from '@/components/share-section';
 import { SurpriseOverlay } from '@/components/surprise-overlay';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -11,6 +13,7 @@ import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const [showDateFlow, setShowDateFlow] = useState(false);
+  const [showPreFinale, setShowPreFinale] = useState(false);
   const [showFinale, setShowFinale] = useState(false);
   const footerHeart = PlaceHolderImages.find(img => img.id === 'gif_footer_heart');
 
@@ -20,11 +23,16 @@ export default function Home() {
   
   const handleDateFlowComplete = () => {
     setShowDateFlow(false);
+    setShowPreFinale(true);
+  }
+
+  const handlePreFinaleComplete = () => {
+    setShowPreFinale(false);
     setShowFinale(true);
   }
 
   useEffect(() => {
-    if (showFinale || showDateFlow) {
+    if (showFinale || showDateFlow || showPreFinale) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -32,13 +40,13 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [showFinale, showDateFlow]);
+  }, [showFinale, showDateFlow, showPreFinale]);
 
   return (
     <main className="flex flex-col items-center min-h-screen overflow-x-hidden">
       <div className="w-full max-w-[1100px] mx-auto px-4">
         <AnimatePresence>
-          {!showDateFlow && !showFinale && (
+          {!showDateFlow && !showPreFinale && !showFinale && (
             <>
               <HeroSection />
               <InteractionSection onYesClick={handleYesClick} />
@@ -66,6 +74,7 @@ export default function Home() {
 
       <AnimatePresence>
         {showDateFlow && <MemoriesSection onComplete={handleDateFlowComplete} />}
+        {showPreFinale && <PreFinaleOverlay onComplete={handlePreFinaleComplete} />}
         {showFinale && <SurpriseOverlay />}
       </AnimatePresence>
     </main>
