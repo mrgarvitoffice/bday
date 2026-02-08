@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -32,20 +32,20 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
     const newY = Math.random() * maxY;
 
     setNoPosition({ x: newX, y: newY });
-    setYesScale(scale => Math.min(scale + 0.3, 5));
+    setYesScale(scale => Math.min(scale + 1, 10));
     setNoTries(tries => tries + 1);
   };
   
   return (
     <section ref={containerRef} className="w-full h-96 relative flex items-center justify-center p-4 overflow-hidden">
-        <div className="flex items-center justify-center gap-8 flex-col sm:flex-row">
+        <div className="flex items-center justify-center gap-8">
             <motion.button
               onClick={onYesClick}
               animate={{ scale: yesScale }}
               whileHover={{ scale: yesScale * 1.1 }}
               whileTap={{ scale: yesScale * 0.95 }}
               transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              className="z-20 px-10 py-6 text-2xl font-bold text-white origin-center rounded-full shadow-lg"
+              className="z-20 px-10 py-6 text-2xl font-bold rounded-full origin-center"
               style={{
                 background: 'linear-gradient(to right, hsl(var(--secondary)), hsl(var(--primary)))',
                 boxShadow: '0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--accent) / 0.5)'
@@ -55,9 +55,10 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
             </motion.button>
             
             <motion.div
-              className="absolute sm:relative"
-              animate={{ x: noPosition.x, y: noPosition.y }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              className="absolute"
+              animate={noTries > 0 ? { x: noPosition.x, y: noPosition.y } : {}}
+              style={noTries === 0 ? { position: 'relative' } : {}}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
               <AnimatePresence>
                 {noTries > 0 && (
@@ -68,7 +69,7 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
                     exit={{ opacity: 0, y: 10 }}
                   >
                       {noTries > 1 && sadGif && <Image src={sadGif.imageUrl} width={50} height={50} alt="sad gif" unoptimized />}
-                      <p className="text-sm text-rose-200 whitespace-nowrap">hehe not allowed 😝</p>
+                      <p className="text-sm text-muted-foreground whitespace-nowrap">hehe not allowed 😝</p>
                   </motion.div>
                 )}
               </AnimatePresence>
