@@ -9,18 +9,27 @@ import { ShareSection } from '@/components/share-section';
 import { SurpriseOverlay } from '@/components/surprise-overlay';
 
 export default function Home() {
-  const [isYesClicked, setIsYesClicked] = useState(false);
-  const [isPageVisible, setIsPageVisible] = useState(true);
+  const [showDateFlow, setShowDateFlow] = useState(false);
+  const [showFinale, setShowFinale] = useState(false);
+  const [isPageFadingOut, setIsPageFadingOut] = useState(false);
 
   const handleYesClick = () => {
-    setIsYesClicked(true);
-    // After the fade-out, unmount the page content for performance
-    setTimeout(() => setIsPageVisible(false), 1000); 
+    setIsPageFadingOut(true);
+    // After a short fade, start the date flow
+    setTimeout(() => {
+      setShowDateFlow(true);
+    }, 1000); 
   };
+  
+  const handleDateFlowComplete = () => {
+    setShowDateFlow(false);
+    // isPageFadingOut is already true, so this will trigger the finale
+    setShowFinale(true);
+  }
 
   // Prevent scrolling when surprise is active
   useEffect(() => {
-    if (isYesClicked) {
+    if (showFinale || showDateFlow) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -28,25 +37,27 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isYesClicked]);
+  }, [showFinale, showDateFlow]);
+  
+  if (showFinale) {
+    return <SurpriseOverlay />;
+  }
+  
+  if (showDateFlow) {
+    return <MemoriesSection onComplete={handleDateFlowComplete} />;
+  }
 
   return (
-    <>
-      {isPageVisible && (
-        <div className={`transition-opacity duration-1000 ${isYesClicked ? 'opacity-0' : 'opacity-100'}`}>
-          <HeroSection />
-          <div className="space-y-16 py-16 md:space-y-24 md:py-24">
-            <InteractionSection onYesClick={handleYesClick} />
-            <LoveLetterSection />
-            <MemoriesSection />
-            <ShareSection />
-          </div>
-          <footer className="py-8 text-center text-white/50">
-            <p>Crafted with love for my valentine.</p>
-          </footer>
-        </div>
-      )}
-      {isYesClicked && <SurpriseOverlay />}
-    </>
+    <div className={`transition-opacity duration-1000 ${isPageFadingOut ? 'opacity-0' : 'opacity-100'}`}>
+      <HeroSection />
+      <div className="space-y-16 py-16 md:space-y-24 md:py-24">
+        <LoveLetterSection />
+        <InteractionSection onYesClick={handleYesClick} />
+        <ShareSection />
+      </div>
+      <footer className="py-8 text-center text-white/50">
+        <p>Crafted with love for my valentine.</p>
+      </footer>
+    </div>
   );
 }

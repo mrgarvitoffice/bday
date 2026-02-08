@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 288 62% 12%; /* Deep Purple */
+    --background: 288 80% 8%; /* Deeper Purple */
     --foreground: 0 0% 98%; /* Almost White */
 
     --card: 288 62% 12%;
@@ -13,16 +13,16 @@
     --popover: 288 62% 12%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 65% 51%; /* Crimson Red #D32F2F */
+    --primary: 350 85% 55%; /* Vibrant Pink-Red */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 353 81% 38%; /* Darker Crimson #B11226 */
+    --secondary: 353 81% 38%; /* Darker Crimson */
     --secondary-foreground: 0 0% 98%;
 
     --muted: 283 69% 28%; /* Muted Purple */
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 353 81% 45%; /* Accent Red */
+    --accent: 350 90% 65%; /* Bright Accent Pink */
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -30,31 +30,31 @@
 
     --border: 283 69% 38%;
     --input: 283 69% 38%;
-    --ring: 0 65% 51%;
+    --ring: 350 85% 55%;
     
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 288 62% 12%;
+    --background: 288 80% 8%;
     --foreground: 0 0% 98%;
     --card: 288 62% 12%;
     --card-foreground: 0 0% 98%;
     --popover: 288 62% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 65% 51%;
+    --primary: 350 85% 55%;
     --primary-foreground: 0 0% 98%;
     --secondary: 353 81% 38%;
     --secondary-foreground: 0 0% 98%;
     --muted: 283 69% 28%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 353 81% 45%;
+    --accent: 350 90% 65%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 283 69% 38%;
     --input: 283 69% 38%;
-    --ring: 0 65% 51%;
+    --ring: 350 85% 55%;
   }
 }
 
@@ -64,8 +64,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-color: #4B145B;
-    background-image: linear-gradient(to bottom right, #6A1B9A, #4B145B);
+    background-color: hsl(288 80% 8%);
+    background-image: linear-gradient(to bottom right, hsl(283, 69%, 18%), hsl(288, 80%, 8%));
   }
 }
 
@@ -73,7 +73,7 @@
   .text-glow {
     text-shadow: 0 0 8px hsl(var(--primary) / 0.8), 0 0 20px hsl(var(--accent) / 0.6);
   }
-  
+
   .neon-glow {
     box-shadow: 0 0 5px hsl(var(--primary)),
                 0 0 10px hsl(var(--primary)),

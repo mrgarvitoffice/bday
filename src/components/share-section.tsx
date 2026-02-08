@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Share2 } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 export function ShareSection() {
   const { toast } = useToast();
@@ -11,8 +11,8 @@ export function ShareSection() {
     if (typeof window === 'undefined') return;
     navigator.clipboard.writeText(window.location.href).then(() => {
       toast({
-        title: 'Link Copied! 💌',
-        description: 'Share it with your valentine.',
+        title: 'Date Invite Copied! 💌',
+        description: 'Send it to your valentine to book your date!',
       });
     }).catch(err => {
       console.error('Failed to copy: ', err);
@@ -27,10 +27,9 @@ export function ShareSection() {
   return (
     <section className="w-full">
       <div className="container flex flex-col items-center justify-center mx-auto">
-        <h3 className="mb-4 text-2xl text-center font-headline">Fallen for me?</h3>
         <Button onClick={handleShare} size="lg" variant="outline" className="text-lg bg-transparent border-white/50 text-white hover:bg-white/10 hover:text-white">
-          <Share2 className="w-5 h-5 mr-2" />
-          Share with your Valentine
+          <Send className="w-5 h-5 mr-2" />
+          Send this date invite
         </Button>
       </div>
     </section>

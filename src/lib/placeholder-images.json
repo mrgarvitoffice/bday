@@ -1,28 +1,76 @@
 {
   "placeholderImages": [
     {
-      "id": "valentine_1",
-      "description": "A couple holding hands at sunset.",
-      "imageUrl": "https://images.unsplash.com/photo-1542460533-50ac46fb13d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb3VwbGUlMjBzdW5zZXR8ZW58MHx8fHwxNzcwNTI0MjgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "couple sunset"
+      "id": "gif_floating_heart",
+      "description": "A cute floating heart GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3N5ZTR6dHJmM2QzY3hyZHg2MW54cDY3bnNqZ3Jtb3N6eWI1emphdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/LpdlqT15ImB3O/giphy.gif",
+      "imageHint": "cute heart"
     },
     {
-      "id": "valentine_2",
-      "description": "A romantic dinner setup with candles.",
-      "imageUrl": "https://images.unsplash.com/photo-1611765083444-a3ce30f1c885?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxyb21hbnRpYyUyMGRpbm5lcnxlbnwwfHx8fDE3NzA0OTQ1NDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "romantic dinner"
+      "id": "gif_couple_shy",
+      "description": "A cute GIF of a shy couple.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGN6cnRjdGZmeDFvemlmc2U5a3A5eG53dG5qeTE3MnM0dmxka2Y2ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/M9gUdhvF3B504/giphy.gif",
+      "imageHint": "cute couple"
     },
     {
-      "id": "valentine_3",
-      "description": "Two glasses of wine with a scenic view.",
-      "imageUrl": "https://images.unsplash.com/photo-1636300827940-544c65f1931f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3aW5lJTIwcm9tYW50aWN8ZW58MHx8fHwxNzcwNTYzMzQ5fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "wine romantic"
+      "id": "gif_blushing_heart",
+      "description": "A blushing heart GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExajI3ZHAwZ3Fod3JjZDRwZHZmODQzZHNrY2Zob3pnc3g0M3U4ZXQ5ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/26u4bkvQ2hZ9h1wM8/giphy.gif",
+      "imageHint": "blushing heart"
     },
     {
-      "id": "valentine_4",
-      "description": "A path covered in rose petals.",
-      "imageUrl": "https://images.unsplash.com/photo-1571506534699-c76894c03ce7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyb3NlJTIwcGV0YWxzfGVufDB8fHx8MTc3MDU2MzM0OXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "rose petals"
+      "id": "gif_morning_hug",
+      "description": "A cute morning hug GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExajl2czJ5enZkZnB5dWlsbzBwNGlkaTNpM2ticmV5cTFmeXJqZzVqdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/G3va3hcoHq8J66WPSI/giphy.gif",
+      "imageHint": "cute hug"
+    },
+    {
+      "id": "gif_coffee_together",
+      "description": "A cute coffee GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNG1ta2VpYjM5OHc5cWY3cjJ6aGJjcXFxa2J5dGJpb3hnMzh1YjQ0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/133c1y62q6vHgI/giphy.gif",
+      "imageHint": "cute coffee"
+    },
+    {
+      "id": "gif_car_ride",
+      "description": "A cute car ride GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2RtcXF6MnZhdW5jNmxwZ2NucWlpbzZubW50amVvM2ZvZ3N5N2xndCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TWWa5JpOU95N6/giphy.gif",
+      "imageHint": "cute driving"
+    },
+    {
+      "id": "gif_sunset_couple",
+      "description": "A cute sunset couple GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWdpcjRscXl2aXp6b3N3emQ0b3EwdjFpNnZobDNsczdpcW10ZGR0biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/1gO2I7aK3yQ4g/giphy.gif",
+      "imageHint": "cute sunset"
+    },
+    {
+      "id": "gif_cuddly_couple",
+      "description": "A cute cuddly couple GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExazl5b2VvNXVidDNqZzhpb2oyMTd5NTVwYjQ0ZHl2eDF3dHBkaHN2MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/mEnciw3e9q6A0/giphy.gif",
+      "imageHint": "cute cuddle"
+    },
+    {
+      "id": "gif_excited_character",
+      "description": "A cute excited character GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExenF2c2k0N2o4cDYxN3NxdjVwMXRpbWI4cmZpZmZmb3U3Z3E0dW0zaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/5GoVLqeAOo6PK/giphy.gif",
+      "imageHint": "cute excited"
+    },
+    {
+      "id": "gif_sad_character",
+      "description": "A cute sad character GIF.",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnIyNWp2c3V1dTY4cXEzbDdncXh2c3pmaDFqcTNqa3Jnbm92aHNieSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XevlqTyQd4o6s/giphy.gif",
+      "imageHint": "cute sad"
+    },
+    {
+      "id": "gif_love_1",
+      "description": "Cute love GIF 1",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2d0bTZucXFrMmY4ejQ2Z2hxdHQ3cmQ2c3k1cTdzc2U5cGRoMmVmbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/19d1hNGn5tW48/giphy.gif",
+      "imageHint": "cute love"
+    },
+    {
+      "id": "gif_love_2",
+      "description": "Cute love GIF 2",
+      "imageUrl": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExODF4OXV1ejZ0N2pkaTJsY2dsaTBucmFncWJscTNmbXZ2Y2I4eGhocyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3o7buc3fN3T4pQg12w/giphy.gif",
+      "imageHint": "i love you"
     }
   ]
 }

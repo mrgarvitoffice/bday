@@ -104,6 +104,22 @@ export default {
         'fall': {
           '0%': { transform: 'translateY(-10vh) rotate(0deg)', opacity: '1' },
           '100%': { transform: 'translateY(110vh) rotate(720deg)', opacity: '1' }
+        },
+        'bounce-in': {
+          '0%': { opacity: '0', transform: 'scale(0.3)' },
+          '50%': { opacity: '1', transform: 'scale(1.05)' },
+          '70%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'heart-pulse': {
+          '0%': { transform: 'scale(1)' },
+          '30%': { transform: 'scale(1.2)' },
+          '60%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'petal-fall': {
+          '0%': { transform: 'translateY(-10vh) rotate(0deg)', opacity: '1' },
+          '100%': { transform: 'translateY(110vh) rotate(360deg)', opacity: '0.5' }
         }
       },
       animation: {
@@ -113,6 +129,9 @@ export default {
         'subtle-pulse': 'subtle-pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'burst': 'burst 1s ease-out forwards 0.5s',
         'fall': 'fall 10s linear',
+        'bounce-in': 'bounce-in 0.6s ease-out',
+        'heart-pulse': 'heart-pulse 1s ease-in-out infinite',
+        'petal-fall': 'petal-fall 15s linear infinite'
       },
     },
   },

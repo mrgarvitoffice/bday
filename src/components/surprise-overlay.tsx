@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
+import Image from 'next/image';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const HeartIcon = ({ style, className }: { style?: React.CSSProperties, className?: string }) => (
     <svg
@@ -15,12 +17,15 @@ const HeartIcon = ({ style, className }: { style?: React.CSSProperties, classNam
   );
 
 export function SurpriseOverlay() {
-  const [showText, setShowText] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const excitedGif = PlaceHolderImages.find(img => img.id === 'gif_excited_character');
+  const loveGif1 = PlaceHolderImages.find(img => img.id === 'gif_love_1');
+  const loveGif2 = PlaceHolderImages.find(img => img.id === 'gif_love_2');
 
   useEffect(() => {
     setIsMounted(true);
-    const timer = setTimeout(() => setShowText(true), 1500);
+    const timer = setTimeout(() => setShowContent(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -32,7 +37,7 @@ export function SurpriseOverlay() {
             id: i,
             style: {
               left: `${Math.random() * 100}%`,
-              animation: `fall ${Math.random() * 8 + 5}s linear ${Math.random() * 10}s infinite`,
+              animation: `fall ${Math.random() * 8 + 5}s linear ${Math.random() * 5}s infinite`,
               width: `${size}rem`,
               height: `${size}rem`,
               opacity: Math.random() * 0.7 + 0.3,
@@ -59,10 +64,17 @@ export function SurpriseOverlay() {
           }}
         />
       </div>
-      {showText && (
-        <h2 className="z-10 px-4 text-4xl text-center md:text-6xl font-headline text-white text-glow animate-in fade-in-0 slide-in-from-bottom-10 duration-1000">
-          You’re mine, today and always 💜❤️
-        </h2>
+      {showContent && (
+        <div className="z-10 flex flex-col items-center gap-8 px-4 text-center animate-in fade-in-0 slide-in-from-bottom-10 duration-1000">
+           <div className="flex items-center justify-center gap-4">
+               {loveGif1 && <Image src={loveGif1.imageUrl} alt={loveGif1.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '200ms'}} />}
+               {excitedGif && <Image src={excitedGif.imageUrl} alt={excitedGif.description} unoptimized width={150} height={150} className="rounded-lg animate-bounce-in" />}
+               {loveGif2 && <Image src={loveGif2.imageUrl} alt={loveGif2.description} unoptimized width={120} height={120} className="rounded-lg animate-bounce-in" style={{animationDelay: '400ms'}} />}
+           </div>
+           <h2 className="text-4xl md:text-5xl font-headline text-white text-glow">
+            Our Valentine date is officially booked 💜❤️
+          </h2>
+        </div>
       )}
     </div>
   );
