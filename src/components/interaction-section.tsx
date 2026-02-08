@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
 
@@ -84,7 +83,7 @@ export function InteractionSection({ onYesClick }: InteractionSectionProps) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                   >
-                      {noTries > 1 && sadGif && <Image src={sadGif.imageUrl} width={50} height={50} alt="sad gif" unoptimized />}
+                      {noTries > 1 && sadGif && <video src={sadGif.imageUrl} width={50} height={50} autoPlay loop muted playsInline />}
                       <p className="text-sm text-muted-foreground whitespace-nowrap">hehe not allowed 😝</p>
                   </motion.div>
                 )}

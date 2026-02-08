@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { FloatingParticles } from './floating-particles';
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const containerVariants = {
@@ -112,12 +111,14 @@ export function HeroSection() {
                 Wanna do that open car babe on Valentine..
             </p>
              {blushingHeart && (
-                <Image 
+                <video 
                     src={blushingHeart.imageUrl}
-                    alt={blushingHeart.description}
                     width={40}
                     height={40}
-                    unoptimized
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className="inline-block"
                 />
             )}

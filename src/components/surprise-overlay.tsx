@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
@@ -95,7 +94,7 @@ export function SurpriseOverlay() {
                 >
                 {loveGifs.map((gif, i) => gif && (
                     <motion.div key={i} variants={itemVariants} className="glassmorphism p-2">
-                        <Image src={gif.imageUrl} alt={gif.description} unoptimized width={100} height={100} className="rounded-lg" />
+                        <video src={gif.imageUrl} autoPlay loop muted playsInline width={100} height={100} className="rounded-lg" />
                     </motion.div>
                 ))}
                 </motion.div>

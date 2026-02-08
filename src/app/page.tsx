@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { HeroSection } from '@/components/hero-section';
 import { InteractionSection } from '@/components/interaction-section';
 import { MemoriesSection } from '@/components/memories-section';
@@ -49,12 +48,14 @@ export default function Home() {
               <footer className="py-8 text-center text-white/50 flex flex-col items-center justify-center gap-4">
                 <p>Crafted with love for my valentine.</p>
                 {footerHeart && (
-                  <Image
+                  <video
                     src={footerHeart.imageUrl}
-                    alt={footerHeart.description}
                     width={50}
                     height={50}
-                    unoptimized
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                   />
                 )}
               </footer>

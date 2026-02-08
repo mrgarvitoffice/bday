@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -37,12 +36,13 @@ const DateStep = ({ text, gifId }: { text: string, gifId: string }) => {
             >
                 {gif && (
                     <div className="relative w-full aspect-square max-w-[300px] rounded-2xl overflow-hidden">
-                        <Image 
+                        <video 
                             src={gif.imageUrl}
-                            alt={text}
-                            fill
-                            unoptimized
-                            style={{ objectFit: 'cover' }}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
                         />
                     </div>
                 )}
