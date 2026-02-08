@@ -10,36 +10,36 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
       delayChildren: 3,
     },
   },
 };
 
 const charVariants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 20, rotateX: -90 },
   visible: {
     opacity: 1,
     y: 0,
+    rotateX: 0,
     transition: {
       type: 'spring',
       damping: 12,
       stiffness: 100,
-      ease: 'easeOut',
-      duration: 0.6,
     },
   },
 };
 
 const subtitleVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
         opacity: 1, 
-        scale: 1,
+        y: 0,
         transition: {
-            delay: 4.5,
-            duration: 0.5,
-            ease: 'easeOut'
+            delay: 4.8,
+            type: 'spring',
+            stiffness: 100,
+            damping: 10
         }
     }
 }
@@ -54,10 +54,11 @@ const HeartIcon = () => (
             width="100"
             height="100"
             viewBox="0 0 100 100"
-            initial={{ scale: 0.5 }}
-            animate={{ scale: [1, 1.05, 1] }}
+            initial={{ scale: 0.5, rotate: 0 }}
+            animate={{ scale: [1, 1.1, 1], rotate: [0, -3, 3, -3, 0] }}
             transition={{ 
-                scale: { delay: 4.5, duration: 2, repeat: Infinity, repeatType: 'mirror' },
+                scale: { delay: 4.5, duration: 2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' },
+                rotate: { delay: 4.5, duration: 5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut'},
                 default: { delay: 2, type: 'spring', stiffness: 100, damping: 10 }
             }}
         >
@@ -93,14 +94,14 @@ export function HeroSection() {
         <HeartIcon />
         
         <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl font-headline text-foreground mt-8 text-glow"
+            className="text-5xl sm:text-6xl md:text-7xl font-headline text-foreground mt-8 text-glow flex flex-wrap justify-center"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
         >
             {title.map((char, index) => (
                 <motion.span key={index} variants={charVariants}>
-                    {char}
+                    {char === ' ' ? '\u00A0' : char}
                 </motion.span>
             ))}
         </motion.h1>
@@ -115,16 +116,18 @@ export function HeroSection() {
                 I've got a surprise for you... if you say yes.
             </p>
              {blushingHeart && (
-                <video 
-                    src={blushingHeart.imageUrl}
-                    width={40}
-                    height={40}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="inline-block"
-                />
+                <motion.div whileHover={{ scale: 1.2, rotate: 10 }}>
+                    <video 
+                        src={blushingHeart.imageUrl}
+                        width={40}
+                        height={40}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="inline-block"
+                    />
+                </motion.div>
             )}
         </motion.div>
     </header>

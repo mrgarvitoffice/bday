@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
@@ -33,14 +34,14 @@ export function FloatingParticles() {
 
   const particles: Particle[] = useMemo(() => {
     if (!isMounted) return [];
-    return Array.from({ length: 30 }).map((_, i) => ({
+    return Array.from({ length: 50 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 12 + 4,
       opacity: Math.random() * 0.4 + 0.1,
-      duration: Math.random() * 25 + 20,
-      delay: Math.random() * 10,
+      duration: Math.random() * 30 + 30,
+      delay: Math.random() * 15,
     }));
   }, [isMounted]);
 
@@ -62,8 +63,8 @@ export function FloatingParticles() {
           }}
           initial={{ y: 0, x: 0, opacity: p.opacity, rotate: Math.random() * 360 }}
           animate={{
-            y: [0, -15 + Math.random() * -10, 0],
-            x: [0, 15 + Math.random() * 10, 0],
+            y: [0, -30 + Math.random() * -15, 0],
+            x: [0, 30 + Math.random() * 15, 0],
           }}
           transition={{
             duration: p.duration,
