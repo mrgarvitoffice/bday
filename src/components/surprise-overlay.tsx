@@ -18,7 +18,7 @@ const HeartIcon = ({ style, className }: { style?: React.CSSProperties, classNam
   );
 
 const loveGifs = [
-    'gif_excited_character', 'gif_love_1', 'gif_love_2', 'gif_love_3', 'gif_love_4', 'gif_love_5', 'gif_love_6'
+    'gif_excited_character', 'gif_love_1', 'gif_love_2', 'gif_love_3', 'gif_love_4', 'gif_love_5', 'gif_love_6', 'gif_floating_heart', 'gif_couple_shy'
 ].map(id => PlaceHolderImages.find(img => img.id === id)).filter(Boolean);
 
 const containerVariants = {
