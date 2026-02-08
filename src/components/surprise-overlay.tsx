@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const HeartIcon = ({ style, className }: { style?: React.CSSProperties, className?: string }) => (
@@ -17,8 +17,23 @@ const HeartIcon = ({ style, className }: { style?: React.CSSProperties, classNam
   );
 
 const loveGifs = [
-    'gif_excited_character', 'gif_love_1', 'gif_love_2', 'gif_love_3', 'gif_love_4', 'gif_love_5', 'gif_love_6', 'gif_floating_heart', 'gif_couple_shy'
+    'gif_excited_character', 
+    'gif_love_1', 
+    'gif_love_2', 
+    'gif_love_3', 
+    'gif_love_4', 
+    'gif_love_5', 
+    'gif_love_6'
 ].map(id => PlaceHolderImages.find(img => img.id === id)).filter(Boolean);
+
+const romanticMessages = [
+    "So, our date is booked...",
+    "You're not getting away this time 😉",
+    "I have a few more surprises for you.",
+    "Just thinking about it gives me butterflies.",
+    "Prepare to be pampered.",
+    "I love you more than words can say.",
+];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,6 +58,33 @@ const itemVariants = {
     },
   },
 };
+
+const messageContainerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.4,
+            delayChildren: 2.5, // Start after initial animations
+        }
+    }
+}
+
+const messageItemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' }}
+}
+
+const finalQuestionVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            delay: 2.5 + (romanticMessages.length * 0.4) + 0.5, // After all messages
+            type: 'spring',
+        },
+    },
+}
 
 
 export function SurpriseOverlay() {
@@ -70,39 +112,65 @@ export function SurpriseOverlay() {
   
   return (
     <motion.div 
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
     >
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0">
             {particles.map(({id, style, className}) => <HeartIcon key={id} style={style} className={className} />)}
         </div>
       
-        <AnimatePresence>
+        <div 
+            className="z-10 flex flex-col items-center gap-8 text-center"
+        >
             <motion.div 
-                className="z-10 flex flex-col items-center gap-8 text-center"
+                className="flex flex-wrap items-center justify-center gap-2 md:gap-4"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+            {loveGifs.map((gif, i) => gif && (
+                <motion.div key={i} variants={itemVariants} className="glassmorphism p-2">
+                    <video src={gif.imageUrl} autoPlay loop muted playsInline width={100} height={100} className="rounded-lg" />
+                </motion.div>
+            ))}
+            </motion.div>
+            <motion.h2 
+                className="text-4xl md:text-5xl font-headline text-foreground text-glow"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+                transition={{ duration: 1, delay: 1.5, ease: 'easeOut' }}
             >
-                <motion.div 
-                    className="flex flex-wrap items-center justify-center gap-2 md:gap-4"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                >
-                {loveGifs.map((gif, i) => gif && (
-                    <motion.div key={i} variants={itemVariants} className="glassmorphism p-2">
-                        <video src={gif.imageUrl} autoPlay loop muted playsInline width={100} height={100} className="rounded-lg" />
-                    </motion.div>
+                Our Valentine date is officially booked 💜❤️
+            </motion.h2>
+
+            <motion.div 
+                className="flex flex-col gap-2 mt-4"
+                variants={messageContainerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                {romanticMessages.map((msg, i) => (
+                    <motion.p 
+                        key={i} 
+                        className="text-xl md:text-2xl font-handwritten text-accent"
+                        variants={messageItemVariants}
+                    >
+                        {msg}
+                    </motion.p>
                 ))}
-                </motion.div>
-                <h2 className="text-4xl md:text-5xl font-headline text-foreground text-glow">
-                    Our Valentine date is officially booked 💜❤️
-                </h2>
             </motion.div>
-        </AnimatePresence>
+
+            <motion.h3 
+                className="text-2xl md:text-3xl font-handwritten text-foreground text-glow mt-6"
+                variants={finalQuestionVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                So... about that open car ride... Wanna make it an all-day adventure? 😉
+            </motion.h3>
+        </div>
     </motion.div>
   );
 }
