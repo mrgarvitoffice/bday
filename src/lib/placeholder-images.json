@@ -3,103 +3,103 @@
     {
       "id": "gif_floating_heart",
       "description": "A cute floating heart GIF.",
-      "imageUrl": "/.idx/gudda-guddi-1.gif",
+      "imageUrl": "/gudda-guddi-1.gif",
       "imageHint": "cute heart"
     },
     {
       "id": "gif_couple_shy",
       "description": "A cute gudda guddi GIF.",
-      "imageUrl": "/.idx/gudda-guddi-2.gif",
+      "imageUrl": "/gudda-guddi-2.gif",
       "imageHint": "cute couple dolls"
     },
     {
       "id": "gif_blushing_heart",
       "description": "A blushing teddy bear with a heart GIF.",
-      "imageUrl": "/.idx/gudda-guddi-3.gif",
+      "imageUrl": "/gudda-guddi-3.gif",
       "imageHint": "blushing teddy bear"
     },
     {
       "id": "gif_sad_character",
       "description": "A cute sad teddy bear GIF.",
-      "imageUrl": "/.idx/gudda-guddi-4.gif",
+      "imageUrl": "/gudda-guddi-4.gif",
       "imageHint": "cute sad teddy"
     },
     {
       "id": "gif_morning_hug",
       "description": "A cute teddy bear hug GIF.",
-      "imageUrl": "/.idx/gudda-guddi-5.gif",
+      "imageUrl": "/gudda-guddi-5.gif",
       "imageHint": "cute teddy hug"
     },
     {
       "id": "gif_coffee_together",
       "description": "A cute teddy bear couple on a swing GIF.",
-      "imageUrl": "/.idx/gudda-guddi-6.gif",
+      "imageUrl": "/gudda-guddi-6.gif",
       "imageHint": "cute teddy swing"
     },
     {
       "id": "gif_car_ride",
       "description": "A cute teddy bear driving a car GIF.",
-      "imageUrl": "/.idx/gudda-guddi-7.gif",
+      "imageUrl": "/gudda-guddi-7.gif",
       "imageHint": "cute teddy driving"
     },
     {
       "id": "gif_sunset_couple",
       "description": "A cute teddy bear couple on a bench GIF.",
-      "imageUrl": "/.idx/gudda-guddi-8.gif",
+      "imageUrl": "/gudda-guddi-8.gif",
       "imageHint": "cute teddy couple"
     },
     {
-      "id": "gif_cuddly_couple",
+      "id": "gif_night_promise",
       "description": "A romantic couple sharing an intimate moment.",
-      "imageUrl": "/.idx/gudda-guddi-17.gif",
+      "imageUrl": "/gudda-guddi-17.gif",
       "imageHint": "romantic couple"
     },
     {
       "id": "gif_excited_character",
       "description": "A cute excited teddy bear GIF.",
-      "imageUrl": "/.idx/gudda-guddi-10.gif",
+      "imageUrl": "/gudda-guddi-10.gif",
       "imageHint": "cute excited teddy"
     },
     {
       "id": "gif_love_1",
       "description": "Cute teddy love GIF 1",
-      "imageUrl": "/.idx/gudda-guddi-11.gif",
+      "imageUrl": "/gudda-guddi-11.gif",
       "imageHint": "cute teddy love"
     },
     {
       "id": "gif_love_2",
       "description": "Cute pooh bear love GIF 2",
-      "imageUrl": "/.idx/gudda-guddi-12.gif",
+      "imageUrl": "/gudda-guddi-12.gif",
       "imageHint": "i love you pooh"
     },
     {
       "id": "gif_love_3",
       "description": "Cute teddy love GIF 3",
-      "imageUrl": "/.idx/gudda-guddi-13.gif",
+      "imageUrl": "/gudda-guddi-13.gif",
       "imageHint": "cute teddy love"
     },
     {
       "id": "gif_love_4",
       "description": "Cute teddy love GIF 4",
-      "imageUrl": "/.idx/gudda-guddi-14.gif",
+      "imageUrl": "/gudda-guddi-14.gif",
       "imageHint": "cute teddy love"
     },
     {
       "id": "gif_love_5",
       "description": "Cute teddy love GIF 5",
-      "imageUrl": "/.idx/gudda-guddi-15.gif",
+      "imageUrl": "/gudda-guddi-15.gif",
       "imageHint": "cute teddy love"
     },
     {
       "id": "gif_love_6",
       "description": "Cute teddy love GIF 6",
-      "imageUrl": "/.idx/gudda-guddi-16.gif",
+      "imageUrl": "/gudda-guddi-16.gif",
       "imageHint": "cute teddy love"
     },
     {
       "id": "gif_footer_heart",
       "description": "A cute heart for the footer.",
-      "imageUrl": "/.idx/gudda-guddi-9.gif",
+      "imageUrl": "/gudda-guddi-9.gif",
       "imageHint": "cute heart"
     }
   ]
