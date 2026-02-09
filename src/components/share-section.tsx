@@ -12,7 +12,7 @@ export function ShareSection() {
     navigator.clipboard.writeText(window.location.href).then(() => {
       toast({
         title: 'Date Invite Copied! 💌',
-        description: 'Send it to your valentine to book your date!',
+        description: 'To my Kaushiki 😊!',
       });
     }).catch(err => {
       console.error('Failed to copy: ', err);

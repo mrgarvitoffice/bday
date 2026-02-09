@@ -6,10 +6,10 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const dateSteps = [
-    { text: "We'll start the day with a long drive, just us and the road...", gifId: "gif_car_ride" },
+    { text: "We'll start.. day with long scuty ride, just us and road...", gifId: "gif_car_ride" },
     { text: "Find a perfect spot to watch the sun go down.", gifId: "gif_sunset_couple" },
-    { text: "And end the night with a promise...", gifId: "gif_cuddly_couple" },
-    { text: "Just say yes... and our story begins.", gifId: "gif_morning_hug" },
+    { text: "And end the night with a happy feeling...", gifId: "gif_cuddly_couple" },
+    { text: "Just say yes... and a suprise begins.", gifId: "gif_morning_hug" },
 ];
 
 const cardVariants = {
