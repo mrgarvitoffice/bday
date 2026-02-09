@@ -81,7 +81,7 @@ export function SurpriseOverlay() {
 
       <div className="z-10 flex flex-col items-center text-center">
         <motion.div
-            className="glassmorphism p-6 md:p-10 max-w-3xl"
+            className="p-6 md:p-10 max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5, ease: 'easeOut' }}
@@ -93,7 +93,7 @@ export function SurpriseOverlay() {
             </h2>
 
             <h3 
-                className="text-2xl md:text-3xl font-handwritten text-accent text-glow mt-6"
+                className="text-2xl md:text-3xl font-handwritten text-foreground text-glow mt-6"
             >
                 Kaushiki you are the girl who knows the rhythm of my heart better than I do: Happy Birthday. Thank you for being the peace in my chaos and the light in my world. If my life were a book  you’d be every single best scene I lived.I’m not just celebrating the day you were born; I’m celebrating every way you’ve made my life better just by being in it. 🌙✨
             </h3>
