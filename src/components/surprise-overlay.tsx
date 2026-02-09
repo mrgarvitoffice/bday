@@ -93,7 +93,8 @@ export function SurpriseOverlay() {
             </h2>
 
             <h3 
-                className="text-2xl md:text-3xl font-handwritten text-primary text-glow mt-6"
+                className="text-2xl md:text-3xl font-handwritten text-foreground mt-6"
+                style={{ textShadow: '0 0 8px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary))' }}
             >
                 Kaushiki you are the girl who knows the rhythm of my heart better than I do: Happy Birthday. Thank you for being the peace in my chaos and the light in my world. If my life were a book  you’d be every single best scene I lived.I’m not just celebrating the day you were born; I’m celebrating every way you’ve made my life better just by being in it. 🌙✨
             </h3>
