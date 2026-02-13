@@ -41,8 +41,8 @@ const itemVariants = {
 
 export function SurpriseOverlay() {
   const shuffledMedia = useMemo(() => finaleMedia.sort(() => 0.5 - Math.random()), []);
-  // Repeat the media list more times to ensure it fills any screen size and prevents empty space.
-  const extendedMedia = useMemo(() => [...shuffledMedia, ...shuffledMedia, ...shuffledMedia, ...shuffledMedia], [shuffledMedia]);
+  // Repeat the media list many times to ensure it fills any screen size and prevents empty space.
+  const extendedMedia = useMemo(() => [...shuffledMedia, ...shuffledMedia, ...shuffledMedia, ...shuffledMedia, ...shuffledMedia], [shuffledMedia]);
 
   return (
     <motion.div 

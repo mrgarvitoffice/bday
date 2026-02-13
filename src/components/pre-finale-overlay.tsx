@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FloatingParticles } from './floating-particles';
+import { CornerHearts } from './corner-hearts';
 
 // Replaced explicit text with romantic alternatives that capture the same tone.
 const romanticMessages = [
@@ -61,7 +61,7 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
       animate={{ opacity: show ? 1 : 0 }}
       transition={{ duration: 0.5 }}
     >
-      <FloatingParticles />
+      <CornerHearts />
       <div className="absolute inset-0 flex items-center justify-center">
         <AnimatePresence mode="wait">
           {index < romanticMessages.length && (
