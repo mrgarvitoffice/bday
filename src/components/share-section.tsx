@@ -1,8 +1,10 @@
+
 "use client";
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Send } from 'lucide-react';
+import { Instagram, Send } from 'lucide-react';
+import Link from 'next/link';
 
 export function ShareSection() {
   const { toast } = useToast();
@@ -26,7 +28,16 @@ export function ShareSection() {
 
   return (
     <section className="w-full">
-      <div className="container flex flex-col items-center justify-center mx-auto">
+      <div className="container flex flex-col items-center justify-center mx-auto gap-6">
+        <Link
+          href="https://www.instagram.com/_.sagar._31?igsh=MXV0Z2JjcDZiMzNhNA=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-white/80 hover:text-white hover:underline transition-colors"
+        >
+          <Instagram className="w-5 h-5" />
+          Watch Creator Profile - Sagar Namdeo
+        </Link>
         <Button onClick={handleShare} size="lg" variant="outline" className="text-lg bg-transparent border-white/50 text-white hover:bg-white/10 hover:text-white">
           <Send className="w-5 h-5 mr-2" />
           Send this date invite
