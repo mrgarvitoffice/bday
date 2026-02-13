@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
@@ -37,26 +36,53 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    audioRef.current = new Audio('/song.mp3');
-    audioRef.current.loop = true;
-    audioRef.current.play().catch(error => {
-      console.error("Audio autoplay failed:", error);
-      // Let's try to play on the first user interaction as a fallback
-      const playOnFirstInteraction = () => {
-        audioRef.current?.play().catch(err => console.error("Audio play on interaction failed:", err));
-        window.removeEventListener('click', playOnFirstInteraction);
-        window.removeEventListener('touchstart', playOnFirstInteraction);
+    const audio = new Audio('/song.mp3');
+    audio.loop = true;
+    audioRef.current = audio;
+
+    let isCancelled = false;
+
+    const playAudio = async () => {
+      try {
+        await audio.play();
+      } catch (err: any) {
+        // In development with React Strict Mode, components may render twice,
+        // causing the first play() attempt to be interrupted by the cleanup's pause().
+        // This is expected and can be safely ignored.
+        if (err.name === 'AbortError') {
+          console.log('Audio play() aborted, this is expected in development.');
+        } else {
+          console.error("Audio autoplay failed:", err);
+          // Fallback for browsers that block autoplay
+          const playOnInteraction = () => {
+            if (!isCancelled) {
+              audio.play().catch(e => console.error("Interaction play failed", e));
+              window.removeEventListener('click', playOnInteraction);
+              window.removeEventListener('touchstart', playOnInteraction);
+            }
+          };
+          window.addEventListener('click', playOnInteraction);
+          window.addEventListener('touchstart', playOnInteraction);
+        }
       }
-      window.addEventListener('click', playOnFirstInteraction);
-      window.addEventListener('touchstart', playOnFirstInteraction);
-    });
+    };
+
+    playAudio();
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = '';
-        audioRef.current = null;
-      }
+      isCancelled = true;
+      // Fade out audio instead of abrupt stop
+      let vol = audio.volume;
+      const fadeOutInterval = setInterval(() => {
+        if (vol > 0.1) {
+          vol -= 0.1;
+          audio.volume = vol;
+        } else {
+          clearInterval(fadeOutInterval);
+          audio.pause();
+          audio.src = '';
+        }
+      }, 50);
     };
   }, []);
 
