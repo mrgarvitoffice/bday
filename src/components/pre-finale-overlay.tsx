@@ -36,7 +36,7 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const audio = new Audio('/song.mp3');
+    const audio = new Audio('/Song.mp3');
     audio.loop = true;
     audioRef.current = audio;
 
@@ -51,7 +51,7 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
           console.log('Audio play() request was interrupted. This is expected in development.');
         } else if (err.name === 'NotSupportedError') {
           // The browser couldn't find or play the audio file.
-          console.error("Error: Audio file not found or format not supported. Make sure 'song.mp3' is in the '/public' folder.");
+          console.error("Error: Audio file not found or format not supported. Make sure 'Song.mp3' is in the '/public' folder.");
         } else {
           // This handles browsers that block autoplay until user interaction.
           console.warn("Audio autoplay was blocked. Adding a listener to play on the next click.");
@@ -73,21 +73,21 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
     return () => {
       isCancelled = true;
       // Fade out audio instead of abrupt stop
-      let vol = audio.volume;
-      const fadeOutInterval = setInterval(() => {
-        if (vol > 0.1) {
-          vol -= 0.1;
-          if (audio) {
-            audio.volume = vol;
+      if (audioRef.current) {
+        let vol = audioRef.current.volume;
+        const fadeOutInterval = setInterval(() => {
+          if (audioRef.current && vol > 0.1) {
+            vol -= 0.1;
+            audioRef.current.volume = vol;
+          } else {
+            clearInterval(fadeOutInterval);
+            if (audioRef.current) {
+              audioRef.current.pause();
+              audioRef.current.src = '';
+            }
           }
-        } else {
-          clearInterval(fadeOutInterval);
-          if (audio) {
-            audio.pause();
-            audio.src = '';
-          }
-        }
-      }, 50);
+        }, 50);
+      }
     };
   }, []);
 
