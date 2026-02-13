@@ -31,6 +31,60 @@
       "imageHint": "cute sunset"
     },
     {
+      "id": "finale_mp4_6",
+      "description": "Finale Video 6",
+      "imageUrl": "/6.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_7",
+      "description": "Finale Video 7",
+      "imageUrl": "/7.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_8",
+      "description": "Finale Video 8",
+      "imageUrl": "/8.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_9",
+      "description": "Finale Video 9",
+      "imageUrl": "/9.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_10",
+      "description": "Finale Video 10",
+      "imageUrl": "/10.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_11",
+      "description": "Finale Video 11",
+      "imageUrl": "/11.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_12",
+      "description": "Finale Video 12",
+      "imageUrl": "/12.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_13",
+      "description": "Finale Video 13",
+      "imageUrl": "/13.mp4",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_mp4_14",
+      "description": "Finale Video 14",
+      "imageUrl": "/14.mp4",
+      "imageHint": "love memory"
+    },
+    {
       "id": "gif_cuddly_couple",
       "description": "Animation 8",
       "imageUrl": "/15.mp4",
@@ -41,6 +95,12 @@
       "description": "Animation 4",
       "imageUrl": "/16.mp4",
       "imageHint": "cute hug"
+    },
+    {
+      "id": "finale_mp4_17",
+      "description": "Finale Video 17",
+      "imageUrl": "/17.mp4",
+      "imageHint": "love memory"
     },
     {
       "id": "finale_jpg_1",

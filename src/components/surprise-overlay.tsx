@@ -5,19 +5,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-// IDs used in other components
-const usedImageIds = [
-  'gif_blushing_heart',
-  'gif_footer_heart',
-  'gif_sad_character',
-  'gif_morning_hug',
-  'gif_car_ride',
-  'gif_sunset_couple',
-  'gif_cuddly_couple'
-];
-
-// Get the remaining media for the finale collage
-const finaleMedia = PlaceHolderImages.filter(img => !usedImageIds.includes(img.id));
+// Use all available media for the finale collage
+const finaleMedia = PlaceHolderImages;
 
 const containerVariants = {
   hidden: { opacity: 1 },

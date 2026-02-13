@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Replaced explicit text with romantic alternatives that capture the same tone.
@@ -34,6 +34,31 @@ const messageVariants = {
 export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio('/song.mp3');
+    audioRef.current.loop = true;
+    audioRef.current.play().catch(error => {
+      console.error("Audio autoplay failed:", error);
+      // Let's try to play on the first user interaction as a fallback
+      const playOnFirstInteraction = () => {
+        audioRef.current?.play().catch(err => console.error("Audio play on interaction failed:", err));
+        window.removeEventListener('click', playOnFirstInteraction);
+        window.removeEventListener('touchstart', playOnFirstInteraction);
+      }
+      window.addEventListener('click', playOnFirstInteraction);
+      window.addEventListener('touchstart', playOnFirstInteraction);
+    });
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (index >= romanticMessages.length) {
