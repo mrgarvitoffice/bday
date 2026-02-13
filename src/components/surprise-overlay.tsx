@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { useState, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 
 // Select all JPGs and two specific GIFs for the collage
 const finaleJpgs = PlaceHolderImages.filter(media => media.imageUrl.endsWith('.jpg'));
@@ -12,131 +12,91 @@ const finaleGifs = PlaceHolderImages.filter(media => ['gif_cuddly_couple', 'gif_
 const allFinaleMedia = [...finaleJpgs, ...finaleGifs];
 
 const containerVariants = {
-  hidden: { opacity: 1 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
+      staggerChildren: 0.05,
+      delayChildren: 0.2,
     }
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, scale: 0.5, rotate: 0 },
-  visible: (i: number) => ({
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
     opacity: 1,
+    y: 0,
     scale: 1,
-    rotate: (i % 2 === 0 ? 1 : -1) * (Math.random() * 5 + 2),
     transition: {
       type: 'spring',
-      damping: 15,
+      damping: 20,
       stiffness: 100,
-      delay: i * 0.05
     }
-  })
+  }
 };
 
 
-interface MediaLayout {
-    id: string;
-    imageUrl: string;
-    description: string;
-    top: string;
-    left: string;
-    width: string;
-    height: string;
-    rotation: number;
-    zIndex: number;
-}
-
-
 export function SurpriseOverlay() {
-  const [layout, setLayout] = useState<MediaLayout[]>([]);
-
   const shuffledMedia = useMemo(() => allFinaleMedia.sort(() => 0.5 - Math.random()), []);
-
-  useEffect(() => {
-    const generateLayout = () => {
-      return shuffledMedia.map((media, index) => {
-        const size = Math.random() * 15 + 15; // Size between 15% and 30% of viewport width
-        return {
-          ...media,
-          top: `${Math.random() * 85}%`,
-          left: `${Math.random() * 85}%`,
-          width: `${size}vw`,
-          height: `${size * (Math.random() * 0.4 + 0.8)}vw`, // slightly random aspect ratio based on width
-          rotation: Math.random() * 20 - 10, // -10 to 10 degrees
-          zIndex: index,
-        };
-      });
-    };
-    setLayout(generateLayout());
-  }, [shuffledMedia]);
-
 
   return (
     <motion.div 
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 overflow-hidden bg-background"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
     >
+      {/* Masonry Collage Background */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-30 blur-[2px]">
+        <motion.div
+            className="h-full w-full p-4 [column-count:2] sm:[column-count:3] md:[column-count:4] lg:[column-count:5] xl:[column-count:6] gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+        >
+            {shuffledMedia.map((media) => {
+            const isVideo = media.imageUrl.endsWith('.mp4');
+            return (
+                <motion.div
+                key={media.id}
+                className="mb-4 rounded-lg overflow-hidden shadow-lg"
+                style={{ breakInside: 'avoid' }}
+                variants={itemVariants}
+                >
+                {isVideo ? (
+                    <video
+                        src={media.imageUrl}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="object-cover w-full h-full"
+                    />
+                ) : (
+                    <Image
+                        src={media.imageUrl}
+                        alt={media.description}
+                        width={500}
+                        height={500}
+                        className="object-cover w-full h-auto"
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                    />
+                )}
+                </motion.div>
+            );
+            })}
+        </motion.div>
+      </div>
+
       <div className="absolute inset-0 bg-gradient-to-t from-background via-black/80 to-background" />
 
-      {/* Media Collage Background */}
-      <motion.div 
-        className="absolute inset-0 opacity-25"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {layout.map((media, i) => {
-          const isVideo = media.imageUrl.endsWith('.mp4');
-          return (
-            <motion.div
-              key={media.id}
-              className="absolute rounded-lg overflow-hidden shadow-2xl"
-              style={{
-                top: media.top,
-                left: media.left,
-                width: media.width,
-                height: media.height,
-                zIndex: media.zIndex,
-              }}
-              variants={itemVariants}
-              custom={i}
-              initial="hidden"
-              animate="visible"
-            >
-              {isVideo ? (
-                 <video
-                    src={media.imageUrl}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="object-cover w-full h-full"
-                  />
-              ) : (
-                <Image
-                  src={media.imageUrl}
-                  alt={media.description}
-                  fill
-                  className="object-cover"
-                  sizes="25vw"
-                />
-              )}
-            </motion.div>
-          );
-        })}
-      </motion.div>
-
-      <div className="z-10 flex flex-col items-center text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center h-full max-w-4xl mx-auto px-4">
         <motion.div
-            className="p-6 md:p-10 max-w-3xl"
+            className="p-6 md:p-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5, ease: 'easeOut' }}
+            transition={{ duration: 1, delay: 1, ease: 'easeOut' }}
         >
             <h2 
                 className="text-4xl md:text-5xl font-headline text-foreground text-glow"
@@ -147,7 +107,7 @@ export function SurpriseOverlay() {
             <h3 
                 className="text-3xl md:text-4xl font-handwritten font-bold mt-6"
                 style={{
-                  color: 'hsl(350 100% 97%)', // Very light valentine shade (same as --foreground)
+                  color: 'hsl(350 100% 97%)', // Very light valentine shade
                   textShadow: [
                     // Black outline for crispness
                     '-1.5px -1.5px 0 #000',
