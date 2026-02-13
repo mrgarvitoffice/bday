@@ -45,7 +45,7 @@ export function SurpriseOverlay() {
         transition={{ duration: 1 }}
     >
       {/* Masonry Collage Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-50">
+      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-70">
         <motion.div
             className="h-full w-full p-4 [column-count:2] sm:[column-count:3] md:[column-count:4] lg:[column-count:5] xl:[column-count:6] gap-4"
             variants={containerVariants}
@@ -86,7 +86,7 @@ export function SurpriseOverlay() {
         </motion.div>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-black/80 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/70 to-black/30" />
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center h-full max-w-4xl mx-auto px-4">
         <motion.div
