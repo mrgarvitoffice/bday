@@ -46,17 +46,18 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
       try {
         await audio.play();
       } catch (err: any) {
-        // In development with React Strict Mode, components may render twice,
-        // causing the first play() attempt to be interrupted by the cleanup's pause().
-        // This is expected and can be safely ignored.
         if (err.name === 'AbortError') {
-          console.log('Audio play() aborted, this is expected in development.');
+          // This is an expected interruption in React's Strict Mode. We can safely ignore it.
+          console.log('Audio play() request was interrupted. This is expected in development.');
+        } else if (err.name === 'NotSupportedError') {
+          // The browser couldn't find or play the audio file.
+          console.error("Error: Audio file not found or format not supported. Make sure 'song.mp3' is in the '/public' folder.");
         } else {
-          console.error("Audio autoplay failed:", err);
-          // Fallback for browsers that block autoplay
+          // This handles browsers that block autoplay until user interaction.
+          console.warn("Audio autoplay was blocked. Adding a listener to play on the next click.");
           const playOnInteraction = () => {
             if (!isCancelled) {
-              audio.play().catch(e => console.error("Interaction play failed", e));
+              audio.play().catch(e => console.error("Interaction-triggered play failed:", e));
               window.removeEventListener('click', playOnInteraction);
               window.removeEventListener('touchstart', playOnInteraction);
             }
@@ -76,11 +77,15 @@ export function PreFinaleOverlay({ onComplete }: { onComplete: () => void }) {
       const fadeOutInterval = setInterval(() => {
         if (vol > 0.1) {
           vol -= 0.1;
-          audio.volume = vol;
+          if (audio) {
+            audio.volume = vol;
+          }
         } else {
           clearInterval(fadeOutInterval);
-          audio.pause();
-          audio.src = '';
+          if (audio) {
+            audio.pause();
+            audio.src = '';
+          }
         }
       }, 50);
     };
