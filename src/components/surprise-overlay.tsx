@@ -93,7 +93,7 @@ export function SurpriseOverlay() {
         </motion.div>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/70 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/40 to-transparent" />
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center h-full max-w-4xl mx-auto px-4">
         <motion.div
