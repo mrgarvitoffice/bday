@@ -36,6 +36,7 @@ const itemVariants = {
 
 export function SurpriseOverlay() {
   const shuffledMedia = useMemo(() => allFinaleMedia.sort(() => 0.5 - Math.random()), []);
+  const extendedMedia = useMemo(() => [...shuffledMedia, ...shuffledMedia, ...shuffledMedia], [shuffledMedia]);
 
   return (
     <motion.div 
@@ -52,11 +53,11 @@ export function SurpriseOverlay() {
             initial="hidden"
             animate="visible"
         >
-            {shuffledMedia.map((media) => {
+            {extendedMedia.map((media, index) => {
             const isVideo = media.imageUrl.endsWith('.mp4');
             return (
                 <motion.div
-                key={media.id}
+                key={`${media.id}-${index}`}
                 className="mb-4 rounded-lg overflow-hidden shadow-lg"
                 style={{ breakInside: 'avoid' }}
                 variants={itemVariants}
