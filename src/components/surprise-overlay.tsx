@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion } from 'framer-motion';
@@ -6,10 +5,8 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useMemo } from 'react';
 
-// Select all JPGs and two specific GIFs for the collage
-const finaleJpgs = PlaceHolderImages.filter(media => media.imageUrl.endsWith('.jpg'));
-const finaleGifs = PlaceHolderImages.filter(media => ['gif_cuddly_couple', 'gif_morning_hug'].includes(media.id));
-const allFinaleMedia = [...finaleJpgs, ...finaleGifs];
+// Use all available media for the collage
+const allFinaleMedia = PlaceHolderImages;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -48,7 +45,7 @@ export function SurpriseOverlay() {
         transition={{ duration: 1 }}
     >
       {/* Masonry Collage Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-30 blur-[2px]">
+      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-50">
         <motion.div
             className="h-full w-full p-4 [column-count:2] sm:[column-count:3] md:[column-count:4] lg:[column-count:5] xl:[column-count:6] gap-4"
             variants={containerVariants}
