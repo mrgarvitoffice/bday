@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -25,7 +24,7 @@ export default function Home() {
 
     const audio = new Audio('/Song.mp3');
     audio.loop = true;
-    audio.currentTime = 30; // Start at 30 seconds
+    audio.currentTime = 27; // Start at 27 seconds
     audioRef.current = audio;
     
     audio.play().catch(err => {
