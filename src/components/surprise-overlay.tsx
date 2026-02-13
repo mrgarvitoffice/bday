@@ -39,11 +39,11 @@ export function SurpriseOverlay() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-black to-background" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-black/80 to-background" />
 
       {/* Media Collage Background */}
       <motion.div 
-        className="absolute inset-0 grid grid-cols-3 sm:grid-cols-5 gap-2 p-2 opacity-25"
+        className="absolute inset-0 grid grid-cols-3 sm:grid-cols-5 gap-2 p-2 opacity-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -81,8 +81,8 @@ export function SurpriseOverlay() {
             </h2>
 
             <h3 
-                className="text-2xl md:text-3xl font-handwritten text-white mt-6"
-                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 8px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 40px hsl(var(--primary))' }}
+                className="text-3xl md:text-4xl font-handwritten font-bold text-white mt-6"
+                style={{ textShadow: '0 3px 12px rgba(0,0,0,0.9), 0 0 10px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.6), 0 0 60px hsl(var(--primary) / 0.4)' }}
             >
                 Kaushiki you are the girl who knows the rhythm of my heart better than I do: Happy Birthday. Thank you for being the peace in my chaos and the light in my world. If my life were a book  you’d be every single best scene I lived.I’m not just celebrating the day you were born; I’m celebrating every way you’ve made my life better just by being in it. 🌙✨
             </h3>
