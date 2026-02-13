@@ -5,8 +5,13 @@ import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useMemo } from 'react';
 
-// Use all available media for the collage
-const allFinaleMedia = PlaceHolderImages;
+// Explicitly select all 15 JPGs and the 2 specified videos for the collage.
+const finaleMedia = PlaceHolderImages.filter(
+  (media) =>
+    media.imageUrl.endsWith('.jpg') ||
+    media.id === 'gif_cuddly_couple' ||
+    media.id === 'gif_morning_hug'
+);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -35,8 +40,9 @@ const itemVariants = {
 
 
 export function SurpriseOverlay() {
-  const shuffledMedia = useMemo(() => allFinaleMedia.sort(() => 0.5 - Math.random()), []);
-  const extendedMedia = useMemo(() => [...shuffledMedia, ...shuffledMedia, ...shuffledMedia], [shuffledMedia]);
+  const shuffledMedia = useMemo(() => finaleMedia.sort(() => 0.5 - Math.random()), []);
+  // Repeat the media list more times to ensure it fills any screen size and prevents empty space.
+  const extendedMedia = useMemo(() => [...shuffledMedia, ...shuffledMedia, ...shuffledMedia, ...shuffledMedia], [shuffledMedia]);
 
   return (
     <motion.div 
@@ -87,7 +93,7 @@ export function SurpriseOverlay() {
         </motion.div>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/70 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/70 to-black/80" />
 
       <div className="relative z-10 flex flex-col items-center justify-center text-center h-full max-w-4xl mx-auto px-4">
         <motion.div
