@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-// Use all available media for the finale collage
-const finaleMedia = PlaceHolderImages;
+// Use only the final JPG images for the collage
+const finaleMedia = PlaceHolderImages.filter(media => media.imageUrl.endsWith('.jpg'));
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -43,39 +43,25 @@ export function SurpriseOverlay() {
 
       {/* Media Collage Background */}
       <motion.div 
-        className="absolute inset-0 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 p-2 opacity-15"
+        className="absolute inset-0 grid grid-cols-3 sm:grid-cols-5 gap-2 p-2 opacity-25"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {finaleMedia.map((media, index) => {
-          const isVideo = media.imageUrl.endsWith('.mp4');
+        {finaleMedia.map((media) => {
           return (
             <motion.div
               key={media.id}
-              className={`relative rounded-lg overflow-hidden
-                ${index % 7 === 1 || index % 7 === 6 ? 'col-span-2 row-span-2' : ''}
-              `}
+              className="relative rounded-lg overflow-hidden"
               variants={itemVariants}
             >
-              {isVideo ? (
-                <video
-                  src={media.imageUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <Image
-                  src={media.imageUrl}
-                  alt={media.description}
-                  fill
-                  className="object-cover"
-                  sizes="20vw"
-                />
-              )}
+              <Image
+                src={media.imageUrl}
+                alt={media.description}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 33vw, 20vw"
+              />
             </motion.div>
           );
         })}

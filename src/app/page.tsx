@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { HeroSection } from '@/components/hero-section';
 import { InteractionSection } from '@/components/interaction-section';
 import { MemoriesSection } from '@/components/memories-section';
@@ -16,9 +16,21 @@ export default function Home() {
   const [showPreFinale, setShowPreFinale] = useState(false);
   const [showFinale, setShowFinale] = useState(false);
   const footerHeart = PlaceHolderImages.find(img => img.id === 'gif_footer_heart');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleYesClick = () => {
     setShowDateFlow(true);
+    
+    if (audioRef.current) return; 
+
+    const audio = new Audio('/Song.mp3');
+    audio.loop = true;
+    audio.currentTime = 30; // Start at 30 seconds
+    audioRef.current = audio;
+    
+    audio.play().catch(err => {
+        console.error("Failed to play audio:", err);
+    });
   };
   
   const handleDateFlowComplete = () => {
@@ -37,10 +49,17 @@ export default function Home() {
     } else {
       document.body.style.overflow = 'auto';
     }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
   }, [showFinale, showDateFlow, showPreFinale]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    return () => {
+      if (audio) {
+        audio.pause();
+        audio.src = '';
+      }
+    };
+  }, []);
 
   return (
     <main className="flex flex-col items-center min-h-screen overflow-x-hidden">
