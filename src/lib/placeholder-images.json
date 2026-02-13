@@ -19,88 +19,118 @@
       "imageHint": "cute sad"
     },
     {
-      "id": "gif_morning_hug",
-      "description": "Animation 4",
-      "imageUrl": "/4.mp4",
-      "imageHint": "cute hug"
-    },
-    {
-      "id": "gif_coffee_together",
-      "description": "Animation 5",
-      "imageUrl": "/5.mp4",
-      "imageHint": "cute couple"
-    },
-    {
       "id": "gif_car_ride",
       "description": "Animation 6",
-      "imageUrl": "/6.mp4",
+      "imageUrl": "/4.mp4",
       "imageHint": "cute ride"
     },
     {
       "id": "gif_sunset_couple",
       "description": "Animation 7",
-      "imageUrl": "/7.mp4",
+      "imageUrl": "/5.mp4",
       "imageHint": "cute sunset"
     },
     {
       "id": "gif_cuddly_couple",
       "description": "Animation 8",
-      "imageUrl": "/8.mp4",
+      "imageUrl": "/15.mp4",
       "imageHint": "cute couple"
     },
     {
-      "id": "gif_excited_character",
-      "description": "Animation 9",
-      "imageUrl": "/9.mp4",
-      "imageHint": "cute excited"
-    },
-    {
-      "id": "gif_love_1",
-      "description": "Animation 10",
-      "imageUrl": "/10.mp4",
-      "imageHint": "cute love"
-    },
-    {
-      "id": "gif_love_2",
-      "description": "Animation 11",
-      "imageUrl": "/11.mp4",
-      "imageHint": "cute love"
-    },
-    {
-      "id": "gif_love_3",
-      "description": "Animation 12",
-      "imageUrl": "/12.mp4",
-      "imageHint": "cute love"
-    },
-    {
-      "id": "gif_love_4",
-      "description": "Animation 13",
-      "imageUrl": "/13.mp4",
-      "imageHint": "cute love"
-    },
-    {
-      "id": "gif_love_5",
-      "description": "Animation 14",
-      "imageUrl": "/14.mp4",
-      "imageHint": "cute love"
-    },
-    {
-      "id": "gif_love_6",
-      "description": "Animation 15",
-      "imageUrl": "/15.mp4",
-      "imageHint": "cute love"
-    },
-    {
-      "id": "gif_love_7",
-      "description": "Animation 16",
+      "id": "gif_morning_hug",
+      "description": "Animation 4",
       "imageUrl": "/16.mp4",
-      "imageHint": "cute love"
+      "imageHint": "cute hug"
     },
     {
-      "id": "gif_love_8",
-      "description": "Animation 17",
-      "imageUrl": "/17.mp4",
-      "imageHint": "cute love"
+      "id": "finale_jpg_1",
+      "description": "Finale Image 1",
+      "imageUrl": "/1.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_2",
+      "description": "Finale Image 2",
+      "imageUrl": "/2.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_3",
+      "description": "Finale Image 3",
+      "imageUrl": "/3.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_4",
+      "description": "Finale Image 4",
+      "imageUrl": "/4.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_5",
+      "description": "Finale Image 5",
+      "imageUrl": "/5.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_6",
+      "description": "Finale Image 6",
+      "imageUrl": "/6.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_7",
+      "description": "Finale Image 7",
+      "imageUrl": "/7.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_8",
+      "description": "Finale Image 8",
+      "imageUrl": "/8.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_9",
+      "description": "Finale Image 9",
+      "imageUrl": "/9.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_10",
+      "description": "Finale Image 10",
+      "imageUrl": "/10.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_11",
+      "description": "Finale Image 11",
+      "imageUrl": "/11.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_12",
+      "description": "Finale Image 12",
+      "imageUrl": "/12.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_13",
+      "description": "Finale Image 13",
+      "imageUrl": "/13.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_14",
+      "description": "Finale Image 14",
+      "imageUrl": "/14.jpg",
+      "imageHint": "love memory"
+    },
+    {
+      "id": "finale_jpg_15",
+      "description": "Finale Image 15",
+      "imageUrl": "/15.jpg",
+      "imageHint": "love memory"
     }
   ]
 }
